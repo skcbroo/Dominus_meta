@@ -7,7 +7,7 @@ const META_TOKEN = process.env.META_TOKEN;
 const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
 
-const META_BASE = `https://graph.facebook.com/v22.0/${PHONE_NUMBER_ID}/messages`;
+const META_BASE = `https://graph.facebook.com/v23.0/${PHONE_NUMBER_ID}/messages`;
 const META_HEADERS = {
   Authorization: `Bearer ${META_TOKEN}`,
   "Content-Type": "application/json",
