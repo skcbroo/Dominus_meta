@@ -136,10 +136,14 @@ app.post("/webhook", async (req, res) => {
           msg.interactive?.button_reply?.title ||
           "";
 
-        const track = pending.get(from);
-        console.log("📩 Mensagem recebida:", { from, body });
+       console.log("📩 Mensagem recebida:", { from, body });
 
-        if (!track) continue;
+try {
+  await sendText(from, "Olá, sou Daniel, assistente virtual da Dominus, como posso ajudá-lo?");
+  console.log("🤖 Resposta automática enviada para", from);
+} catch (e) {
+  console.warn("Falha ao responder:", e.response?.data || e.message);
+}
 
         const agora = Date.now();
         if (agora > track.expireAtMs) {
