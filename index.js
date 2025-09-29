@@ -55,7 +55,7 @@ function sleep(ms) {
 const pending = new Map();
 
 // ====== META WRAPPERS ======
-const META_BASE = `https://graph.facebook.com/v20.0/${PHONE_NUMBER_ID}/messages`;
+const META_BASE = `https://graph.facebook.com/v22.0/${PHONE_NUMBER_ID}/messages`;
 const META_HEADERS = {
     Authorization: `Bearer ${META_TOKEN}`,
     "Content-Type": "application/json",
