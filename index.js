@@ -150,29 +150,16 @@ app.post("/webhook", async (req, res) => {
         const msgTimeMs = (msg.timestamp ? Number(msg.timestamp) : 0) * 1000;
         if (msgTimeMs && msgTimeMs < track.sentAtMs) continue;
 
-        if (ehAfirmação(body)) {
-          try {
-            await sendText(
-              from,
-              "Excelente! ✅ Vou encaminhar seus dados para análise; em breve um analista entra em contato."
-            );
-          } catch (e) {
-            console.warn("Falha ao responder lead:", e.response?.data || e.message);
-          }
+  try {
+  await sendText(
+    from,
+    "Olá, sou Daniel, assistente virtual da Dominus, como posso ajudá-lo?"
+  );
+  console.log("🤖 Resposta automática enviada para", from);
+} catch (e) {
+  console.warn("Falha ao responder lead:", e.response?.data || e.message);
+}
 
-          if (ADMIN_LOG_NUMBER) {
-            try {
-              await sendText(
-                ADMIN_LOG_NUMBER,
-                `📢 Cliente confirmou interesse!\n\n• Nome: ${track.nome}\n• Número: ${track.numeroDestino}\n• Processo: ${track.processo || "—"}`
-              );
-              console.log("✅ Aviso ao admin (texto livre) enviado.");
-            } catch (e) {
-              const msgErr = e.response?.data || e.message;
-              console.warn("Texto livre ao admin falhou:", msgErr);
-            }
-          }
-        }
 
         pending.delete(from);
       }
