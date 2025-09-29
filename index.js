@@ -106,6 +106,45 @@ app.post("/webhook", async (req, res) => {
   }
 });*/
 
+// ====== META WRAPPERS ======
+async function sendText(toE164, text) {
+  return axios.post(
+    META_BASE,
+    {
+      messaging_product: "whatsapp",
+      to: toE164,
+      type: "text",
+      text: { body: text },
+    },
+    { headers: META_HEADERS }
+  );
+}
+
+// 👉 faltava essa função
+async function sendTemplate(toE164, templateName, params = [], lang = "en_US") {
+  const body = {
+    messaging_product: "whatsapp",
+    to: toE164,
+    type: "template",
+    template: {
+      name: templateName,
+      language: { code: lang },
+    },
+  };
+
+  if (params.length) {
+    body.template.components = [
+      {
+        type: "body",
+        parameters: params.map((v) => ({ type: "text", text: String(v) })),
+      },
+    ];
+  }
+
+  return axios.post(META_BASE, body, { headers: META_HEADERS });
+}
+
+
 // Teste com template hello_world
 (async () => {
   try {
