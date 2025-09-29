@@ -1,188 +1,273 @@
-// botB.js — Responde rounds 2,4,6 (lado B) ao receber mensagens do A
-require("dotenv").config();
+
+const fs = require("fs");//
 const express = require("express");
-const qrcode = require("qrcode");
-const { Client, LocalAuth } = require("whatsapp-web.js");
-const fs = require("fs");
-const path = require("path");
+const axios = require("axios");
 
 // ====== CONFIG ======
-const PORT = Number(process.env.PORT_B || process.env.PORT || 3002); // porta do bot B
-//const SESSION_PATH = process.env.SESSION_PATH_B || process.env.SESSION_PATH || "/data/whatsapp";
-//const CLIENT_ID = process.env.WWEBJS_CLIENT_ID_B || process.env.WWEBJS_CLIENT_ID || "zapbot";
+const PORT = process.env.PORT || 3000;
+const MONITOR_WINDOW_MS = (Number(process.env.MONITOR_WINDOW_HOURS || 8)) * 60 * 60 * 1000;
+const META_TOKEN = process.env.META_TOKEN;
+const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+const ADMIN_LOG_NUMBER = process.env.ADMIN_LOG_NUMBER;
 
-const CONTACTS_FILE  = process.env.CONTACTS_FILE  || "./contacts.json";  // usado p/ whitelist do A
-const DIALOGUES_FILE = process.env.DIALOGUES_FILE || "./dialogues.json";
+const TEMPLATE_NAME = "dominus_captacao_inicial";
+const TEMPLATE_LANG = process.env.TEMPLATE_LANG || "en";
+//const ADMIN_TEMPLATE = process.env.ADMIN_TEMPLATE || "dominus_admin_alerta";
 
-const DIALOG_MIN_DELAY_MS = Number(process.env.DIALOG_MIN_DELAY_MS || 30_000);
-const DIALOG_MAX_DELAY_MS = Number(process.env.DIALOG_MAX_DELAY_MS || 180_000);
-const BLOCK_UNKNOWN = String(process.env.BLOCK_UNKNOWN || "true").toLowerCase() !== "false";
-
-// Números de A liberados via .env (E164, separados por vírgula)
-const ALLOWED_A_NUMBERS = (process.env.ALLOWED_A_NUMBERS || "")
-  .split(",").map(s => s.trim()).filter(Boolean);
-
-// ====== Utils ======
-function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
-function randomDelay(){ return randInt(DIALOG_MIN_DELAY_MS, DIALOG_MAX_DELAY_MS); }
-function renderText(tpl, ctx){ return String(tpl||"").replace(/\{\{(\w+)\}\}/g,(_,k)=>String(ctx[k]??"")); }
-function normalizarBrasil(numeroRaw){
-  let n = String(numeroRaw||"").replace(/\D/g,"");
-  if(!n.startsWith("55")) n = "55"+n;
-  n = n.replace(/^55+0*/, "55");
-  return n;
-}
-function variantsBR(n){
-  const out = new Set([n]);
-  // 55 + DDD(2) + 9 + 8 dígitos → versão sem o '9'
-  if (n.length === 13 && n.startsWith("55") && n[4] === "9") {
-    out.add(n.slice(0,4) + n.slice(5));
-  }
-  // 55 + DDD(2) + 8 dígitos → versão com '9'
-  if (n.length === 12 && n.startsWith("55")) {
-    out.add(n.slice(0,4) + "9" + n.slice(4));
-  }
-  return out;
-}
-function primeiroNome(nome){
-  if(!nome) return "Contato";
-  const p = String(nome).trim().split(/\s+/)[0]||"Contato";
-  return p.charAt(0).toUpperCase()+p.slice(1).toLowerCase();
-}
-
-// ====== Estado ======
-let lastQr = null, isReady = false;
-let CONTACTS = { grupoA: [], grupoB: [] };
-let DIALOGUES = { rounds: {} };
-let whitelistA = new Set(); // números e164 (com variantes) de A autorizados
-
-function load(file){
-  try{ return JSON.parse(fs.readFileSync(path.resolve(file),"utf-8")); }
-  catch{ return null; }
-}
-function reload(){
-  CONTACTS = load(CONTACTS_FILE) || { grupoA: [], grupoB: [] };
-  DIALOGUES = load(DIALOGUES_FILE) || { rounds: {} };
-
-  const wl = new Set();
-  // contatos do grupo A
-  for (const c of (CONTACTS.grupoA || [])) {
-    const base = normalizarBrasil(c.numero);
-    for (const v of variantsBR(base)) wl.add(v);
-  }
-  // números explícitos via .env
-  for (const s of ALLOWED_A_NUMBERS) {
-    const base = normalizarBrasil(s);
-    for (const v of variantsBR(base)) wl.add(v);
-  }
-  whitelistA = wl;
-
-  console.log(`↻ [B] whitelist A=${whitelistA.size} | rounds=${Object.keys(DIALOGUES.rounds||{}).length}`);
-  console.log("👀 [B] exemplos whitelistA:", Array.from(whitelistA).slice(0,8));
-}
-reload();
-
-// conversaState guarda qual foi o último round A recebido por chat
-// quando A manda 1 → B responde 2; quando A manda 3 → B responde 4; quando A manda 5 → B responde 6
-const conversaState = new Map(); // chatIdA -> { lastARound: 0, nomeA, meuNome }
-
-// ====== WhatsApp client (B) ======
-const client = new Client({
-  authStrategy: new LocalAuth({ clientId: CLIENT_ID, dataPath: SESSION_PATH }),
-  puppeteer: { headless: true, args: ["--no-sandbox","--disable-setuid-sandbox","--disable-dev-shm-usage"] }
-});
-client.on("qr", qr => { lastQr=qr; isReady=false; console.log("📶 [B] QR pronto em /qr"); });
-client.on("ready", ()=>{
-  isReady=true; lastQr=null;
-  console.log("✅ [B] pronto");
-  console.log("Meu JID:", client.info?.wid?._serialized || "(desconhecido)");
-});
-client.on("auth_failure", m=>console.error("❌ [B] auth_failure:", m));
-client.on("disconnected", r=>{ isReady=false; console.warn("⚠️ [B] disconnected:", r); });
-
-function pickB(round){
-  const opts = DIALOGUES?.rounds?.[String(round)]?.B || [];
-  if(!opts.length) return null;
-  return opts[Math.floor(Math.random()*opts.length)];
-}
-
-client.on("message", async (msg) => {
-  try{
-    if(msg.fromMe) return;
-    if(!msg.from.endsWith("@c.us")) return; // ignora grupos/status
-
-    const chatId = msg.from;
-    const numeroA = (chatId||"").split("@")[0];
-    const e164A = normalizarBrasil(numeroA);
-
-    if(BLOCK_UNKNOWN && !whitelistA.has(e164A)){
-      console.log("🙈 [B] ignorando não-whitelist A:", e164A);
-      return;
-    }
-
-    const contactA = await msg.getContact();
-    const nomeA = primeiroNome(contactA?.pushname || contactA?.name || "Contato");
-
-    // estado desta conversa
-    const st = conversaState.get(chatId) || { lastARound: 0, nomeA, meuNome: "Eu" };
-
-    // heurística simples: contar falas do A por ordem de chegada
-    // 1a vez que A fala -> assumimos que é o round 1; depois 3; depois 5
-    let proximoBRound;
-    if(st.lastARound === 0){ st.lastARound = 1; proximoBRound = 2; }
-    else if(st.lastARound === 1){ st.lastARound = 3; proximoBRound = 4; }
-    else if(st.lastARound === 3){ st.lastARound = 5; proximoBRound = 6; }
-    else {
-      // já completou 6, não responder mais automaticamente
-      console.log(`[B] conversa concluída com ${numeroA}`);
-      conversaState.delete(chatId);
-      return;
-    }
-
-    conversaState.set(chatId, st);
-
-    const tpl = pickB(proximoBRound);
-    if(!tpl){ console.log(`⚠️ [B] sem template B para round ${proximoBRound}`); return; }
-
-    // responder com atraso aleatório
-    const texto = renderText(tpl, { nome: nomeA, nomeA: nomeA, nomeB: st.meuNome });
-    const delay = randomDelay();
-    console.log(`[B→A] agendando round ${proximoBRound} em ${delay}ms p/ ${chatId}: "${texto}"`);
-    setTimeout(async ()=>{
-      try{ await client.sendMessage(chatId, texto); }
-      catch(e){ console.warn("⚠️ [B] falha send:", e?.message||e); }
-    }, delay);
-
-    // se acabamos de responder o 6, limpamos o estado após enviar
-    if(proximoBRound === 6){
-      setTimeout(()=>{ conversaState.delete(chatId); }, delay+2_000);
-    }
-  }catch(e){
-    console.warn("⚠️ [B] handler erro:", e?.message||e);
-  }
-});
-
-// ====== HTTP util ======
+// ====== EXPRESS ======
 const app = express();
 app.use(express.json());
 
-app.get("/qr", async (_req,res)=>{
-  if(!lastQr && isReady) return res.send("✅ Já pareado (B).");
-  if(!lastQr) return res.send("Aguardando QR (B)...");
-  const png = await qrcode.toBuffer(lastQr,{type:"png",margin:1,scale:6});
-  res.setHeader("Content-Type","image/png"); res.send(png);
+// ====== HELPERS ======
+function normalizaTexto(s) {
+    return String(s || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toUpperCase();
+}
+function ehAfirmação(body) {
+    const t = normalizaTexto(body);
+    return /^(SIM|S|OK|CLARO|POSSO|QUERO|VAMOS|SIM POR FAVOR|SIM, POR FAVOR|POSITIVO|TA|TÁ|BORA|ENVIA|PODE ENVIAR)$/.test(
+        t
+    );
+}
+/** Normaliza número BR para E.164 com DDI 55 (ex: 5561999112233) */
+function normalizarBrasil(numeroRaw) {
+    let n = (numeroRaw || "").replace(/\D/g, "");
+    if (!n.startsWith("55")) n = "55" + n;
+    n = n.replace(/^55+0*/, "55");
+    return n;
+}
+function primeiroNomeFormatado(nome) {
+    if (!nome) return "Cliente";
+    const partes = nome.trim().split(/\s+/);
+    const primeiro = partes[0].toLowerCase();
+    return primeiro.charAt(0).toUpperCase() + primeiro.slice(1);
+}
+function sleep(ms) {
+    return new Promise((r) => setTimeout(r, ms));
+}
+
+// ====== ESTADO DE RASTREIO (para correlacionar resas) ======
+/** pending: chave = número do lead (E.164) */
+const pending = new Map();
+
+// ====== META WRAPPERS ======
+const META_BASE = `https://graph.facebook.com/v20.0/${PHONE_NUMBER_ID}/messages`;
+const META_HEADERS = {
+    Authorization: `Bearer ${META_TOKEN}`,
+    "Content-Type": "application/json",
+};
+
+async function sendTemplate(toE164, templateName, params = [], lang = TEMPLATE_LANG) {
+    const body = {
+        messaging_product: "whatsapp",
+        to: toE164,
+        type: "template",
+        template: {
+            name: templateName,
+            language: { code: lang },
+        },
+    };
+    if (params.length) {
+        body.template.components = [
+            {
+                type: "body",
+                parameters: params.map((v) => ({ type: "text", text: String(v) })),
+            },
+        ];
+    }
+    return axios.post(META_BASE, body, { headers: META_HEADERS });
+}
+
+async function sendText(toE164, text) {
+    return axios.post(
+        META_BASE,
+        { messaging_product: "whatsapp", to: toE164, type: "text", text: { body: text } },
+        { headers: META_HEADERS }
+    );
+}
+
+// ====== HEALTH ======
+app.get("/healthz", (_req, res) => {
+    res.json({ ok: true, provider: "meta", pending: pending.size });
 });
 
-app.post("/reload", (_req,res)=>{ reload(); res.json({ok:true, whitelistA: whitelistA.size}); });
-app.get("/healthz", (_req,res)=>{ res.json({ok:true, ready:isReady}); });
-
-// debug helpers
-app.get("/debug/whitelist", (_req,res)=>{
-  res.json({ ok:true, whitelist: Array.from(whitelistA) });
+// ====== WEBHOOK (verificação) ======
+app.get("/webhook", (req, res) => {
+    const mode = req.query["hub.mode"];
+    const token = req.query["hub.verify_token"];
+    const challenge = req.query["hub.challenge"];
+    if (mode === "subscribe" && token === VERIFY_TOKEN) {
+        return res.status(200).send(challenge);
+    }
+    return res.sendStatus(403);
 });
-app.get("/whoami", (_req,res)=>{
-  res.json({ jid: client.info?.wid?._serialized || null });
+
+// ====== WEBHOOK (mensagens recebidas) ======
+app.post("/webhook", async (req, res) => {
+  try {
+    const entry = req.body?.entry?.[0];
+    const changes = entry?.changes?.[0];
+    const value = changes?.value;
+
+    // 📦 STATUS DE ENTREGA
+    if (Array.isArray(value?.statuses)) {
+      for (const st of value.statuses) {
+        console.log("📦 STATUS:", {
+          id: st.id,
+          status: st.status,
+          to: st.recipient_id,
+          errors: st.errors
+        });
+      }
+    }
+
+    // 💬 MENSAGENS RECEBIDAS
+    const messages = value?.messages;
+    if (Array.isArray(messages)) {
+      for (const msg of messages) {
+        const from = msg.from;
+        const body =
+          msg.text?.body ||
+          msg.button?.text ||
+          msg.interactive?.button_reply?.title ||
+          "";
+
+        const track = pending.get(from);
+        console.log("📩 Mensagem recebida:", { from, body });
+
+        if (!track) continue;
+
+        const agora = Date.now();
+        if (agora > track.expireAtMs) {
+          pending.delete(from);
+          continue;
+        }
+
+        const msgTimeMs = (msg.timestamp ? Number(msg.timestamp) : 0) * 1000;
+        if (msgTimeMs && msgTimeMs < track.sentAtMs) continue;
+
+        if (ehAfirmação(body)) {
+          try {
+            await sendText(
+              from,
+              "Excelente! ✅ Vou encaminhar seus dados para análise; em breve um analista entra em contato."
+            );
+          } catch (e) {
+            console.warn("Falha ao responder lead:", e.response?.data || e.message);
+          }
+
+          if (ADMIN_LOG_NUMBER) {
+            try {
+              await sendText(
+                ADMIN_LOG_NUMBER,
+                `📢 Cliente confirmou interesse!\n\n• Nome: ${track.nome}\n• Número: ${track.numeroDestino}\n• Processo: ${track.processo || "—"}`
+              );
+              console.log("✅ Aviso ao admin (texto livre) enviado.");
+            } catch (e) {
+              const msgErr = e.response?.data || e.message;
+              console.warn("Texto livre ao admin falhou:", msgErr);
+            }
+          }
+        }
+
+        pending.delete(from);
+      }
+    }
+  } catch (e) {
+    console.warn("⚠️ Webhook error:", e.message);
+  } finally {
+    res.sendStatus(200);
+  }
 });
 
-app.listen(PORT, ()=>console.log(`🌐 [B] HTTP :${PORT}`));
-client.initialize();
+
+// ====== DISPARO EM MASSA ======
+/**
+ * Estrutura esperada por item em ./teste.json:
+ * { reclamante: "Nome", telefone: "6199...,6198...", numero_processo: "0001234-56.2023.5.10.0001" }
+ */
+function paramsTemplateLead({ nome }) {
+    // Template Marketing com 1 variável ({{1}} = nome)
+    return [nome || "Cliente"];
+}
+
+async function enviarMensagemParaNumeros(resultados) {
+    for (let i = 0; i < resultados.length; i++) {
+        const item = resultados[i];
+        const nome = primeiroNomeFormatado(item.reclamante) || `Contato ${i + 1}`;
+
+        const celulares = String(item.telefone || "")
+            .split(/[,;]+/)
+            .map((s) => s.trim())
+            .filter(Boolean);
+
+        if (!celulares.length) continue;
+
+        let enviado = false;
+
+        for (const numeroRaw of celulares) {
+            const numero = normalizarBrasil(numeroRaw);
+
+            try {
+                // Disparo inicial: TEMPLATE de Marketing
+                const resp = await sendTemplate(numero, TEMPLATE_NAME, paramsTemplateLead({ nome }));
+                console.log(`📤 Template enviado para ${nome} em ${numero}`, resp.data);
+
+                // Track para capturar a resposta
+                pending.set(numero, {
+                    sentAtMs: Date.now(),
+                    nome,
+                    processo: item.numero_processo,
+                    numeroDestino: numero,
+                    expireAtMs: Date.now() + MONITOR_WINDOW_MS,
+                });
+
+                enviado = true;
+                break; // já enviou para um válido
+            } catch (err) {
+                console.log(
+                    `❌ Falha ao enviar template para ${numero}:`,
+                    err.response?.data || err.message
+                );
+            }
+        }
+
+        if (!enviado) {
+            console.log(`🚫 ${nome} — não foi possível enviar para nenhum número.`);
+        }
+
+        // Delay aleatório 10–30s + 10s (para suavizar)
+        //  const jitter = Math.floor(Math.random() * (20000 - 10000 + 1)) + 10000;
+        //await sleep(jitter + 10000);
+    }
+}
+
+// ====== BOOT ======
+app.listen(PORT, async () => {
+    console.log(`🌐 HTTP on :${PORT}`);
+
+    if (!META_TOKEN || !PHONE_NUMBER_ID) {
+        console.error("❌ META_TOKEN e PHONE_NUMBER_ID são obrigatórios no .env.");
+        return;
+    }
+
+    try {
+        const dados = JSON.parse(fs.readFileSync("./teste.json", "utf-8"));
+        await enviarMensagemParaNumeros(dados);
+        console.log("✅ Disparo inicial concluído.");
+    } catch (e) {
+        console.error("⚠️ Não foi possível ler/enviar ./teste.json:", e.message);
+    }
+});
+
+// ====== LIMPEZA DE TRACKING ======
+setInterval(() => {
+    const agora = Date.now();
+    for (const [chatId, info] of pending) {
+        if (agora >= info.expireAtMs) pending.delete(chatId);
+    }
+}, 30 * 1000);
