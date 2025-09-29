@@ -17,7 +17,7 @@ const META_HEADERS = {
 const app = express();
 app.use(express.json());
 
-// ====== META WRAPPERS ======
+// ====== META WRAPPER ======
 async function sendText(toE164, text) {
   return axios.post(
     META_BASE,
@@ -31,12 +31,12 @@ async function sendText(toE164, text) {
   );
 }
 
-// ====== HEALTH ======
+// ====== HEALTHCHECK ======
 app.get("/healthz", (_req, res) => {
   res.json({ ok: true, provider: "meta" });
 });
 
-// ====== WEBHOOK (verificação) ======
+// ====== VERIFICAÇÃO DE WEBHOOK ======
 app.get("/webhook", (req, res) => {
   const mode = req.query["hub.mode"];
   const token = req.query["hub.verify_token"];
@@ -48,44 +48,24 @@ app.get("/webhook", (req, res) => {
   return res.sendStatus(403);
 });
 
-// ====== WEBHOOK (mensagens recebidas) ======
+// ====== RECEBIMENTO DE MENSAGENS ======
 app.post("/webhook", async (req, res) => {
   try {
     const entry = req.body?.entry?.[0];
     const changes = entry?.changes?.[0];
     const value = changes?.value;
 
-    // 📦 STATUS DE ENTREGA
-    if (Array.isArray(value?.statuses)) {
-      for (const st of value.statuses) {
-        console.log("📦 STATUS:", {
-          id: st.id,
-          status: st.status,
-          to: st.recipient_id,
-          errors: st.errors,
-        });
-      }
-    }
-
-    // 💬 MENSAGENS RECEBIDAS
-    const messages = value?.messages;
-    if (Array.isArray(messages)) {
-      for (const msg of messages) {
-        const from = msg.from;
-        const body =
-          msg.text?.body ||
-          msg.button?.text ||
-          msg.interactive?.button_reply?.title ||
-          "";
+    // Mensagens recebidas
+    if (Array.isArray(value?.messages)) {
+      for (const msg of value.messages) {
+        const from = msg.from; // número do cliente
+        const body = msg.text?.body || "";
 
         console.log("📩 Mensagem recebida:", { from, body });
 
         try {
-          await sendText(
-            from,
-            "Olá, sou Daniel, assistente virtual da Dominus, como posso ajudá-lo?"
-          );
-          console.log("🤖 Resposta automática enviada para", from);
+          await sendText(from, "Olá, tudo certo?");
+          console.log("🤖 Resposta enviada para", from);
         } catch (e) {
           console.warn("Falha ao responder:", e.response?.data || e.message);
         }
@@ -99,66 +79,10 @@ app.post("/webhook", async (req, res) => {
 });
 
 // ====== BOOT ======
-/*app.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`🌐 HTTP on :${PORT}`);
   if (!META_TOKEN || !PHONE_NUMBER_ID) {
     console.error("❌ META_TOKEN e PHONE_NUMBER_ID são obrigatórios no .env.");
   }
-});*/
-
-// ====== META WRAPPERS ======
-async function sendText(toE164, text) {
-  return axios.post(
-    META_BASE,
-    {
-      messaging_product: "whatsapp",
-      to: toE164,
-      type: "text",
-      text: { body: text },
-    },
-    { headers: META_HEADERS }
-  );
-}
-
-// 👉 faltava essa função
-async function sendTemplate(toE164, templateName, params = [], lang = "en_US") {
-  const body = {
-    messaging_product: "whatsapp",
-    to: toE164,
-    type: "template",
-    template: {
-      name: templateName,
-      language: { code: lang },
-    },
-  };
-
-  if (params.length) {
-    body.template.components = [
-      {
-        type: "body",
-        parameters: params.map((v) => ({ type: "text", text: String(v) })),
-      },
-    ];
-  }
-
-  return axios.post(META_BASE, body, { headers: META_HEADERS });
-}
-
-
-// Teste com template hello_world
-(async () => {
-  try {
-    const numero = "5561999242573"; // 👈 coloque o número destino em formato E.164
-    const resp = await sendTemplate(
-      numero,
-      "hello_world",
-      [],     // esse template não exige parâmetros
-      "en_US" // idioma do template
-    );
-    console.log("📤 Template hello_world enviado:", resp.data);
-  } catch (err) {
-    console.error("❌ Erro ao enviar hello_world:", err.response?.data || err.message);
-  }
-})();
-
+});
 
