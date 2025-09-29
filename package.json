@@ -1,21 +1,21 @@
 {
    "name": "zap",
-  "private": true,
-  "version": "1.0.0",
-  "scripts": {
-    "dev": "node index.js",
-    "start": "node index.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "dotenv": "^17.2.2",
-    "express": "^5.1.0",
-    "node-cron": "^4.2.1",
-    "qrcode": "^1.5.4",
-    "whatsapp-web.js": "^1.33.2"
-  }
+   "private": true,
+   "version": "1.0.0",
+   "scripts": {
+      "dev": "node index.js",
+      "start": "node index.js"
+   },
+   "keywords": [],
+   "author": "",
+   "license": "ISC",
+   "description": "",
+   "dependencies": {
+      "axios": "^1.12.2",
+      "dotenv": "^17.2.2",
+      "express": "^5.1.0",
+      "node-cron": "^4.2.1",
+      "qrcode": "^1.5.4",
+      "whatsapp-web.js": "^1.33.2"
+   }
 }
-
