@@ -99,10 +99,27 @@ app.post("/webhook", async (req, res) => {
 });
 
 // ====== BOOT ======
-app.listen(PORT, () => {
+/*app.listen(PORT, () => {
   console.log(`🌐 HTTP on :${PORT}`);
   if (!META_TOKEN || !PHONE_NUMBER_ID) {
     console.error("❌ META_TOKEN e PHONE_NUMBER_ID são obrigatórios no .env.");
   }
-});
+});*/
+
+// Teste com template hello_world
+(async () => {
+  try {
+    const numero = "5561999242573"; // 👈 coloque o número destino em formato E.164
+    const resp = await sendTemplate(
+      numero,
+      "hello_world",
+      [],     // esse template não exige parâmetros
+      "en_US" // idioma do template
+    );
+    console.log("📤 Template hello_world enviado:", resp.data);
+  } catch (err) {
+    console.error("❌ Erro ao enviar hello_world:", err.response?.data || err.message);
+  }
+})();
+
 
