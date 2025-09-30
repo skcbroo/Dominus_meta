@@ -25,16 +25,18 @@ app.use(express.json());
 
 // ====== HELPERS ======
 function normalizarBrasil(numeroRaw) {
-  let n = (numeroRaw || "").replace(/\D/g, ""); // só dígitos
-  if (!n.startsWith("55")) n = "55" + n; // garante DDI
+  let n = (numeroRaw || "").replace(/\D/g, "");
+  if (!n.startsWith("55")) n = "55" + n;
   return n;
 }
+
 function primeiroNomeFormatado(nome) {
   if (!nome) return "Contato";
   const partes = nome.trim().split(/\s+/);
   const primeiro = partes[0].toLowerCase();
   return primeiro.charAt(0).toUpperCase() + primeiro.slice(1);
 }
+
 function normalizaTexto(s) {
   return String(s || "")
     .normalize("NFD")
@@ -42,22 +44,37 @@ function normalizaTexto(s) {
     .trim()
     .toUpperCase();
 }
+
 function ehAfirmação(body) {
   const t = normalizaTexto(body);
-
-  // SIM, S, SIIIM, OK, OOOK, CLARO, VAMOS, etc.
-  return /^(S+I*M+|S|OK+|CLARO+|VAMOS+|QUERO+|POSITIVO+|ENVIA+|PODE ENVIAR+)$/.test(t);
+  return (
+    /^(S+I*M+|S)$/.test(t) ||
+    /^OK+$/.test(t) ||
+    t.includes("CLARO") ||
+    t.includes("VAMOS") ||
+    t.includes("QUERO") ||
+    t.includes("POSITIVO") ||
+    t.includes("ENVIA") ||
+    t.includes("PODE ENVIAR")
+  );
 }
 
 function ehNegacao(body) {
   const t = normalizaTexto(body);
-
-  // NÃO, NAO, N, NÃO QUERO, etc.
-  return /^(N(AO|ÃO)?$|N(AO|ÃO)? QUERO|N(AO|ÃO)?, OBRIGADO|OBRIGADO|DESCARTAR|N(AO|ÃO)? TENHO INTERESSE)$/.test(t);
+  return (
+    t === "N" ||
+    t === "NAO" ||
+    t === "NÃO" ||
+    t.includes("NAO QUERO") ||
+    t.includes("NÃO QUERO") ||
+    t.includes("OBRIGADO") ||
+    t.includes("DESCARTAR") ||
+    t.includes("NAO TENHO INTERESSE") ||
+    t.includes("NÃO TENHO INTERESSE")
+  );
 }
 
-
-// ====== ENVIO DE TEMPLATE ======
+// ====== ENVIO ======
 async function sendTemplate(toE164, variables = []) {
   return axios.post(
     META_BASE,
@@ -80,7 +97,6 @@ async function sendTemplate(toE164, variables = []) {
   );
 }
 
-// ====== ENVIO DE TEXTO ======
 async function sendText(toE164, text) {
   return axios.post(
     META_BASE,
@@ -92,6 +108,17 @@ async function sendText(toE164, text) {
     },
     { headers: META_HEADERS }
   );
+}
+
+// ====== LOG ADM ======
+async function enviarLogADM({ nome, numero, processo, resposta }) {
+  if (!ADMIN_NUMBER) return;
+  const textoLog = `📬 *Resposta recebida*
+• Cliente: ${nome || "(desconhecido)"}
+• Número: ${numero}
+• Processo: ${processo || "(não informado)"}
+• Resposta: ${resposta || "(vazio)"}`;
+  await sendText(ADMIN_NUMBER, textoLog);
 }
 
 // ====== ENVIO EM MASSA ======
@@ -108,12 +135,17 @@ async function enviarMensagemParaNumeros() {
 
       try {
         const resp = await sendTemplate(numero, [nome]);
-        console.log(`📤 Template enviado para ${nome} (${numero}) →`, resp.data.messages[0].id);
+        console.log(
+          `📤 Template enviado para ${nome} (${numero}) →`,
+          resp.data.messages[0].id
+        );
       } catch (err) {
-        console.error(`❌ Falha ao enviar para ${nome} (${numero})`, err.response?.data || err.message);
+        console.error(
+          `❌ Falha ao enviar para ${nome} (${numero})`,
+          err.response?.data || err.message
+        );
       }
 
-      // delay entre disparos (60–120s aleatório)
       const delay = 60000 + Math.floor(Math.random() * 60001);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
@@ -132,28 +164,49 @@ app.post("/webhook", async (req, res) => {
     if (Array.isArray(value?.messages)) {
       for (const msg of value.messages) {
         const from = msg.from;
-        const body = msg.text?.body || "";
+        let body = "";
+
+        // captura texto, botões e interativos
+        if (msg.text?.body) body = msg.text.body;
+        if (msg.button?.text) body = msg.button.text;
+        if (msg.interactive?.button_reply?.title)
+          body = msg.interactive.button_reply.title;
+        if (msg.interactive?.list_reply?.title)
+          body = msg.interactive.list_reply.title;
 
         console.log("📩 Mensagem recebida:", { from, body });
 
+        const nomeContato = primeiroNomeFormatado(
+          value.contacts?.[0]?.profile?.name
+        );
+
         if (ehAfirmação(body)) {
-          await sendText(from, "Excelente! ✅ Vou encaminhar seus dados para análise. Em breve um analista entrará em contato.");
-          if (ADMIN_NUMBER) {
-            await sendText(
-              ADMIN_NUMBER,
-              `📬 [Confirmação recebida]\nCliente: ${from}\nResposta: SIM\nMensagem: ${body}`
-            );
-          }
+          await sendText(
+            from,
+            "Excelente! ✅ Vou encaminhar seus dados para análise. Em breve um analista entrará em contato."
+          );
+          await enviarLogADM({
+            nome: nomeContato,
+            numero: from,
+            processo: null,
+            resposta: body || "SIM",
+          });
         } else if (ehNegacao(body)) {
-          await sendText(from, "Entendo, obrigado pela atenção 🙏. Continuamos à disposição caso mude de ideia.");
-          if (ADMIN_NUMBER) {
-            await sendText(
-              ADMIN_NUMBER,
-              `📬 [Negação recebida]\nCliente: ${from}\nResposta: NÃO\nMensagem: ${body}`
-            );
-          }
+          await sendText(
+            from,
+            "Entendo, obrigado pela atenção 🙏. Continuamos à disposição caso mude de ideia."
+          );
+          await enviarLogADM({
+            nome: nomeContato,
+            numero: from,
+            processo: null,
+            resposta: body || "NÃO",
+          });
         } else {
-          await sendText(from, "Olá! 😊 Responda apenas *SIM* para receber a proposta ou *NÃO* para encerrar o contato.");
+          await sendText(
+            from,
+            "Olá! 😊 Responda apenas *SIM* para receber a proposta ou *NÃO* para encerrar o contato."
+          );
         }
       }
     }
@@ -179,6 +232,7 @@ app.get("/webhook", (req, res) => {
 app.get("/healthz", (_req, res) => {
   res.json({ ok: true, provider: "meta" });
 });
+
 app.get("/send-all", async (_req, res) => {
   enviarMensagemParaNumeros();
   res.json({ ok: true, started: true });
