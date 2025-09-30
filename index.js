@@ -11,7 +11,7 @@ const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 const TEMPLATE_NAME = "contato"; // nome do template aprovado
 const LANG = "en"; // idioma do template
 const ARQUIVO = process.env.ARQUIVO_JSON || "./teste.json"; // lista de contatos
-const ADMIN_NUMBER = process.env.ADMIN_LOG_NUMBER; // ex: 5561999887766
+const ADMIN_NUMBER = process.env.ADMIN_NUMBER; // ex: 5561999887766
 
 const META_BASE = `https://graph.facebook.com/v23.0/${PHONE_NUMBER_ID}/messages`;
 const META_HEADERS = {
@@ -111,28 +111,29 @@ async function sendText(toE164, text) {
 }
 
 // ====== LOG ADM ======
-async function enviarLogADM({ nome, numero, processo, resposta }) {
+async function enviarLogADM({ clienteJson, nomeZap, numero, resposta }) {
   if (!ADMIN_NUMBER) {
     console.warn("⚠️ ADMIN_NUMBER não definido no .env");
     return;
   }
   try {
     const textoLog = `📬 *Resposta recebida*
-• Cliente: ${nome || "(desconhecido)"}
-• Número: ${numero}
-• Processo: ${processo || "(não informado)"}
+• Nome (JSON): ${clienteJson?.reclamante || "(não informado)"}
+• Telefone (JSON): ${clienteJson?.telefone || "(não informado)"}
+• Processo: ${clienteJson?.numero_processo || "(não informado)"}
+• Nome no WhatsApp: ${nomeZap || "(desconhecido)"}
+• Número (WhatsApp): ${numero}
 • Resposta: ${resposta || "(vazio)"}`;
 
     await sendText(ADMIN_NUMBER, textoLog);
-    console.log(`📤 Log enviado ao ADM (${textoLog})`);
-    console.log("==================================");
+    console.log(`📤 Log enviado ao ADM (${ADMIN_NUMBER})`);
   } catch (e) {
     console.error("❌ Falha ao enviar log para ADM:", e.response?.data || e.message);
   }
 }
 
-// ====== MAPA DE PROCESSOS ======
-const processoPorNumero = new Map();
+// ====== MAPA DE CLIENTES ======
+const clientePorNumero = new Map();
 
 // ====== ENVIO EM MASSA ======
 async function enviarMensagemParaNumeros() {
@@ -141,25 +142,38 @@ async function enviarMensagemParaNumeros() {
     for (let i = 0; i < dados.length; i++) {
       const item = dados[i];
       const nome = primeiroNomeFormatado(item.reclamante) || `Contato ${i + 1}`;
-      const celular = item.telefone;
-      if (!celular) continue;
 
-      const numero = normalizarBrasil(celular);
+      // pega todos os números do campo telefone
+      const numeros = String(item.telefone || "")
+        .split(/[,;]+/)
+        .map((s) => normalizarBrasil(s.trim()))
+        .filter(Boolean);
 
-      // guarda o processo vinculado ao número
-      processoPorNumero.set(numero, item.numero_processo);
+      // vincula todos os números ao objeto inteiro
+      for (const num of numeros) {
+        clientePorNumero.set(num, item);
 
-      try {
-        const resp = await sendTemplate(numero, [nome]);
-        console.log(
-          `📤 Template enviado para ${nome} (${numero}) →`,
-          resp.data.messages[0].id
-        );
-      } catch (err) {
-        console.error(
-          `❌ Falha ao enviar para ${nome} (${numero})`,
-          err.response?.data || err.message
-        );
+        // também vincula versão sem "9"
+        const sem9 = num.replace(/^55(\d{2})9(\d{8})$/, "55$1$2");
+        if (sem9 !== num) {
+          clientePorNumero.set(sem9, item);
+        }
+      }
+
+      // envia só para o primeiro válido
+      if (numeros[0]) {
+        try {
+          const resp = await sendTemplate(numeros[0], [nome]);
+          console.log(
+            `📤 Template enviado para ${nome} (${numeros[0]}) →`,
+            resp.data.messages[0].id
+          );
+        } catch (err) {
+          console.error(
+            `❌ Falha ao enviar para ${nome} (${numeros[0]})`,
+            err.response?.data || err.message
+          );
+        }
       }
 
       const delay = 60000 + Math.floor(Math.random() * 60001);
@@ -191,10 +205,8 @@ app.post("/webhook", async (req, res) => {
 
         console.log("📩 Mensagem recebida:", { from, body });
 
-        const nomeContato = primeiroNomeFormatado(
-          value.contacts?.[0]?.profile?.name
-        );
-        const processo = processoPorNumero.get(from) || null;
+        const nomeZap = value.contacts?.[0]?.profile?.name || null;
+        const clienteJson = clientePorNumero.get(from) || null;
 
         if (ehAfirmação(body)) {
           await sendText(
@@ -202,9 +214,9 @@ app.post("/webhook", async (req, res) => {
             "Excelente! ✅ Vou encaminhar seus dados para análise. Em breve um analista entrará em contato."
           );
           await enviarLogADM({
-            nome: nomeContato,
+            clienteJson,
+            nomeZap,
             numero: from,
-            processo,
             resposta: body || "SIM",
           });
         } else if (ehNegacao(body)) {
@@ -213,9 +225,9 @@ app.post("/webhook", async (req, res) => {
             "Entendo, obrigado pela atenção 🙏. Continuamos à disposição caso mude de ideia."
           );
           await enviarLogADM({
-            nome: nomeContato,
+            clienteJson,
+            nomeZap,
             numero: from,
-            processo,
             resposta: body || "NÃO",
           });
         } else {
