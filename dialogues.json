@@ -2,16 +2,16 @@
   "rounds": {
     "1": {
       "A": [
-        "Prezado(a) {{nome}}, confirmo se está tudo certo para nosso jantar de amanhã.",
-        "Boa tarde, {{nome}}. Apenas gostaria de confirmar se a viagem de amanhã permanece agendada.",
-        "Olá, {{nome}}. Poderia confirmar se a partida de futebol de amanhã será mantida?",
-        "Caro(a) {{nome}}, nosso encontro de amanhã continua confirmado?",
-        "Prezado(a) {{nome}}, gostaria de verificar se o almoço de amanhã está mantido.",
-        "Oi, {{nome}}. Confirmando se nos encontraremos na academia amanhã conforme combinado.",
-        "Tudo certo, {{nome}}? Amanhã seguimos com o passeio programado?",
-        "Boa noite, {{nome}}. Gostaria de confirmar se o churrasco de amanhã está mantido.",
-        "{{nome}}, a caminhada de amanhã continua confirmada?",
-        "Olá, {{nome}}. Seguimos com a aula agendada para amanhã?"
+        "Prezado(a) {{nome}}, gostaria de confirmar se nossa reunião de amanhã está mantida.",
+        "Boa tarde, {{nome}}. Poderia confirmar se a reunião de amanhã permanece agendada?",
+        "Olá, {{nome}}. Desejo confirmar se o compromisso de amanhã será realizado conforme previsto.",
+        "Caro(a) {{nome}}, confirmo se nosso encontro profissional de amanhã continua confirmado.",
+        "Prezado(a) {{nome}}, gostaria de verificar se a reunião de amanhã está mantida.",
+        "Oi, {{nome}}. Apenas confirmando se nossa reunião de amanhã está de pé.",
+        "Tudo certo, {{nome}}? A reunião de amanhã continua programada?",
+        "Boa noite, {{nome}}. Gostaria de confirmar se a reunião de amanhã ocorrerá conforme planejado.",
+        "{{nome}}, confirmo se o encontro de amanhã está mantido.",
+        "Olá, {{nome}}. Seguimos com a reunião previamente agendada para amanhã?"
       ],
       "B": []
     },
@@ -19,29 +19,29 @@
       "A": [],
       "B": [
         "Sim, confirmado.",
-        "Está tudo certo, amanhã ocorrerá conforme previsto.",
-        "Perfeito, o compromisso está mantido.",
+        "Está tudo em ordem, a reunião ocorrerá conforme previsto.",
+        "Perfeito, o compromisso permanece mantido.",
         "Pode ficar tranquilo, está garantido.",
-        "Confirmado, não houve alterações.",
-        "Sim, permanece no mesmo esquema combinado.",
-        "Tudo em ordem, pode contar com isso.",
-        "Exato, compromisso fechado.",
-        "Segue mantido, sem mudanças.",
-        "Está confirmado, conforme planejado."
+        "Confirmado, não houve qualquer alteração.",
+        "Sim, permanece no mesmo formato combinado.",
+        "Tudo certo, pode contar com isso.",
+        "Exato, compromisso mantido.",
+        "Segue confirmado, sem alterações.",
+        "Está devidamente confirmado."
       ]
     },
     "3": {
       "A": [
-        "Ótimo. Poderia confirmar se o local será o mesmo do nosso último encontro?",
-        "Excelente. O restaurante permanece o mesmo?",
-        "Então, será no endereço previamente combinado, correto?",
-        "Perfeito. Continuamos com o mesmo ponto de encontro?",
-        "Confirmando: será naquele bar que havíamos combinado?",
-        "O local continua o mesmo, correto?",
-        "Mantemos o mesmo espaço definido anteriormente?",
-        "Então nos vemos no endereço já combinado?",
-        "O ponto de encontro permanece inalterado?",
-        "Podemos considerar o mesmo local habitual?"
+        "Ótimo. Poderia confirmar se o local da reunião permanece o mesmo?",
+        "Excelente. O endereço da reunião será o mesmo de antes, correto?",
+        "Então, será no endereço previamente combinado?",
+        "Perfeito. Mantemos o mesmo local definido anteriormente?",
+        "Confirmando: será na mesma sala de reuniões que havíamos definido?",
+        "O local permanece inalterado, correto?",
+        "Mantemos o espaço estabelecido anteriormente?",
+        "Podemos considerar o endereço já combinado?",
+        "O ponto de encontro permanece o mesmo?",
+        "Confirmo se será no local habitual da reunião."
       ],
       "B": []
     },
@@ -50,10 +50,10 @@
       "B": [
         "Sim, o local está mantido.",
         "Confirmado, o endereço é o mesmo.",
-        "Nada foi alterado, permanece no mesmo restaurante.",
-        "Exatamente, no mesmo local que mencionamos.",
-        "Isso mesmo, ponto de encontro inalterado.",
-        "Confirmado, não houve mudança de espaço.",
+        "Nada foi alterado, será no mesmo local.",
+        "Exatamente, no mesmo local definido anteriormente.",
+        "Correto, o ponto de encontro não sofreu alterações.",
+        "Confirmado, o espaço permanece o mesmo.",
         "Está correto, o endereço é o mesmo.",
         "Exato, será no local habitual.",
         "Mantemos o mesmo lugar, conforme combinado.",
@@ -62,16 +62,16 @@
     },
     "5": {
       "A": [
-        "Perfeito. Poderia confirmar se o horário permanece às 20h?",
-        "Então, está combinado para as 19h, correto?",
+        "Perfeito. Poderia confirmar se o horário da reunião permanece às 20h?",
+        "Está mantido para as 19h, correto?",
         "Posso confirmar para às 10h da manhã?",
         "Seguimos com o horário definido para as 18h?",
-        "O horário das 21h continua o mesmo?",
-        "Está mantido para às 9h da manhã?",
-        "Fechado às 14h, como acordado?",
-        "Podemos confirmar às 16h?",
+        "O horário das 21h continua estabelecido?",
+        "Permanece às 9h da manhã?",
+        "Confirmo se será às 14h, como acordado?",
+        "Podemos confirmar para às 16h?",
         "Mantemos às 11h, correto?",
-        "Está estabelecido para às 15h, confirmo?"
+        "Está definido para às 15h, confirmo?"
       ],
       "B": []
     },
