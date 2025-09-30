@@ -44,14 +44,18 @@ function normalizaTexto(s) {
 }
 function ehAfirmação(body) {
   const t = normalizaTexto(body);
-  return /^(SIM|S|OK|CLARO|POSSO|QUERO|VAMOS|POSITIVO|ENVIA|PODE ENVIAR)$/.test(t);
+
+  // SIM, S, SIIIM, OK, OOOK, CLARO, VAMOS, etc.
+  return /^(S+I*M+|S|OK+|CLARO+|VAMOS+|QUERO+|POSITIVO+|ENVIA+|PODE ENVIAR+)$/.test(t);
 }
+
 function ehNegacao(body) {
   const t = normalizaTexto(body);
-  return /^(NAO|NÃO|N|NÃO QUERO|NAO QUERO|NÃO, OBRIGADO|NAO, OBRIGADO|OBRIGADO|DESCARTAR|NÃO TENHO INTERESSE|NAO TENHO INTERESSE)$/.test(
-    t
-  );
+
+  // NÃO, NAO, N, NÃO QUERO, etc.
+  return /^(N(AO|ÃO)?$|N(AO|ÃO)? QUERO|N(AO|ÃO)?, OBRIGADO|OBRIGADO|DESCARTAR|N(AO|ÃO)? TENHO INTERESSE)$/.test(t);
 }
+
 
 // ====== ENVIO DE TEMPLATE ======
 async function sendTemplate(toE164, variables = []) {
