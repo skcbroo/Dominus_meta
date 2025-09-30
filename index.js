@@ -112,14 +112,26 @@ async function sendText(toE164, text) {
 
 // ====== LOG ADM ======
 async function enviarLogADM({ nome, numero, processo, resposta }) {
-  if (!ADMIN_NUMBER) return;
-  const textoLog = `📬 *Resposta recebida*
+  if (!ADMIN_NUMBER) {
+    console.warn("⚠️ ADMIN_NUMBER não definido no .env");
+    return;
+  }
+  try {
+    const textoLog = `📬 *Resposta recebida*
 • Cliente: ${nome || "(desconhecido)"}
 • Número: ${numero}
 • Processo: ${processo || "(não informado)"}
 • Resposta: ${resposta || "(vazio)"}`;
-  await sendText(ADMIN_NUMBER, textoLog);
+
+    await sendText(ADMIN_NUMBER, textoLog);
+    console.log(`📤 Log enviado ao ADM (${ADMIN_NUMBER})`);
+  } catch (e) {
+    console.error("❌ Falha ao enviar log para ADM:", e.response?.data || e.message);
+  }
 }
+
+// ====== MAPA DE PROCESSOS ======
+const processoPorNumero = new Map();
 
 // ====== ENVIO EM MASSA ======
 async function enviarMensagemParaNumeros() {
@@ -132,6 +144,9 @@ async function enviarMensagemParaNumeros() {
       if (!celular) continue;
 
       const numero = normalizarBrasil(celular);
+
+      // guarda o processo vinculado ao número
+      processoPorNumero.set(numero, item.numero_processo);
 
       try {
         const resp = await sendTemplate(numero, [nome]);
@@ -166,7 +181,6 @@ app.post("/webhook", async (req, res) => {
         const from = msg.from;
         let body = "";
 
-        // captura texto, botões e interativos
         if (msg.text?.body) body = msg.text.body;
         if (msg.button?.text) body = msg.button.text;
         if (msg.interactive?.button_reply?.title)
@@ -179,6 +193,7 @@ app.post("/webhook", async (req, res) => {
         const nomeContato = primeiroNomeFormatado(
           value.contacts?.[0]?.profile?.name
         );
+        const processo = processoPorNumero.get(from) || null;
 
         if (ehAfirmação(body)) {
           await sendText(
@@ -188,7 +203,7 @@ app.post("/webhook", async (req, res) => {
           await enviarLogADM({
             nome: nomeContato,
             numero: from,
-            processo: null,
+            processo,
             resposta: body || "SIM",
           });
         } else if (ehNegacao(body)) {
@@ -199,7 +214,7 @@ app.post("/webhook", async (req, res) => {
           await enviarLogADM({
             nome: nomeContato,
             numero: from,
-            processo: null,
+            processo,
             resposta: body || "NÃO",
           });
         } else {
