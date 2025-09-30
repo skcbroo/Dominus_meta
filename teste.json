@@ -1,1 +1,13 @@
-[] 
+[
+    {
+    "arquivo": "AIRR_0100422-33.2023.5.01.0063_3grau.pdf",
+    "numero_processo": "0100422-33.2023.5.01.0063",
+    "estado": "Rio de Janeiro",
+    "reclamante": "SAMUEL HENRIQUE DA SILVA BARROS",
+    "cpf_reclamante": null,
+    "reclamada": "TEL AVIV SEGURANCA LTDA, MUNICIPIO DE RIO DE JANEIRO",
+    "valor_da_causa": "R$ 106.128,10",
+    "status": "Pesquisa no Desk OK",
+    "telefone": "+55 21 97109-5747"
+  }
+] 
