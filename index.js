@@ -11,7 +11,7 @@ const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 const TEMPLATE_NAME = "contato"; // nome do template aprovado
 const LANG = "en"; // idioma do template
 const ARQUIVO = process.env.ARQUIVO_JSON || "./teste.json"; // lista de contatos
-const ADMIN_NUMBER = process.env.ADMIN_NUMBER; // ex: 5561999887766
+const ADMIN_NUMBER = process.env.ADMIN_LOG_NUMBER; // ex: 5561999887766
 
 const META_BASE = `https://graph.facebook.com/v23.0/${PHONE_NUMBER_ID}/messages`;
 const META_HEADERS = {
