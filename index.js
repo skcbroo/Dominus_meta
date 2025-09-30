@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 const META_TOKEN = process.env.META_TOKEN;
 const PHONE_NUMBER_ID = process.env.PHONE_NUMBER_ID;
 const TEMPLATE_NAME = "contato"; // nome do template aprovado
-const LANG = "en_US"; // idioma do template
+const LANG = "en"; // idioma do template
 const ARQUIVO = process.env.ARQUIVO_JSON || "./teste.json"; // lista de contatos
 const ADMIN_NUMBER = process.env.ADMIN_NUMBER; // ex: 5561999887766
 
