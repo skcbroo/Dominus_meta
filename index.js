@@ -126,7 +126,7 @@ async function enviarLogADM({ clienteJson, nomeZap, numero, resposta }) {
 • Resposta: ${resposta || "(vazio)"}`;
 
     await sendText(ADMIN_NUMBER, textoLog);
-    console.log(`📤 Log enviado ao ADM (${ADMIN_NUMBER})`);
+    console.log(`📤 Log enviado ao ADM ${textoLog}`);
   } catch (e) {
     console.error("❌ Falha ao enviar log para ADM:", e.response?.data || e.message);
   }
