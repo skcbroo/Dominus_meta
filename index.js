@@ -227,6 +227,7 @@ async function enviarMensagemParaNumeros() {
 }
 
 // ====== WEBHOOK RECEBIMENTO ======
+// ====== WEBHOOK RECEBIMENTO ======
 app.post("/webhook", async (req, res) => {
   try {
     const entry = req.body?.entry?.[0];
@@ -248,20 +249,38 @@ app.post("/webhook", async (req, res) => {
         const clienteJson = clientePorNumero.get(from) || null;
 
         console.log("📩 Mensagem recebida:", { from, body, nomeZap, vinculadoAoJson: !!clienteJson });
-//historico
+
+        // historico
         historicoMensagens.push({
-  from,
-  body,
-  nomeZap,
-  vinculadoAoJson: !!clienteJson,
-  timestamp: new Date().toISOString()
-});
+          from,
+          body,
+          nomeZap,
+          vinculadoAoJson: !!clienteJson,
+          timestamp: new Date().toISOString()
+        });
+        if (historicoMensagens.length > 1000) historicoMensagens.shift();
+        // fim historico
 
-// mantém no máximo as últimas 1000 mensagens em memória
-if (historicoMensagens.length > 1000) historicoMensagens.shift();
-//histo^
+        // 🚫 Se número não está no JSON → ignora (não responde)
+        if (!clienteJson) {
+          console.log("📩 Mensagem de número DESCONHECIDO (ignorado):", {
+            from,
+            body,
+            nomeZap,
+          });
 
-        // 1) Se conhecemos o item do JSON e o nome do WhatsApp veio, checa concordância antes de qualquer coisa
+          // opcional: logar no admin
+          await enviarLogADM({
+            clienteJson: null,
+            nomeZap,
+            numero: from,
+            resposta: `(ignorado, lead desconhecido) → ${body}`,
+          });
+
+          continue; // não responde esse contato
+        }
+
+        // 1) Se conhecemos o item do JSON e o nome do WhatsApp veio, checa concordância
         if (clienteJson && nomeZap && !nomesConcordam(clienteJson.reclamante, nomeZap)) {
           const esperado = extrairPrimeiroNome(clienteJson.reclamante);
           const recebido = extrairPrimeiroNome(nomeZap);
@@ -323,6 +342,7 @@ if (historicoMensagens.length > 1000) historicoMensagens.shift();
     res.sendStatus(200);
   }
 });
+
 
 // ====== VERIFICAÇÃO DE WEBHOOK ======
 app.get("/webhook", (req, res) => {
