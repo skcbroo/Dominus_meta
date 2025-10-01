@@ -246,6 +246,18 @@ app.post("/webhook", async (req, res) => {
         const clienteJson = clientePorNumero.get(from) || null;
 
         console.log("📩 Mensagem recebida:", { from, body, nomeZap, vinculadoAoJson: !!clienteJson });
+//historico
+        historicoMensagens.push({
+  from,
+  body,
+  nomeZap,
+  vinculadoAoJson: !!clienteJson,
+  timestamp: new Date().toISOString()
+});
+
+// mantém no máximo as últimas 1000 mensagens em memória
+if (historicoMensagens.length > 1000) historicoMensagens.shift();
+//histo^
 
         // 1) Se conhecemos o item do JSON e o nome do WhatsApp veio, checa concordância antes de qualquer coisa
         if (clienteJson && nomeZap && !nomesConcordam(clienteJson.reclamante, nomeZap)) {
@@ -329,6 +341,11 @@ app.get("/send-all", async (_req, res) => {
   enviarMensagemParaNumeros();
   res.json({ ok: true, started: true });
 });
+// ====== ROTA PARA CONSULTAR HISTÓRICO ======
+app.get("/mensagens", (_req, res) => {
+  res.json(historicoMensagens);
+});
+
 
 // ====== BOOT ======
 app.listen(PORT, () => {
