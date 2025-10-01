@@ -216,7 +216,7 @@ async function enviarMensagemParaNumeros() {
       }
 
       // delay entre disparos: 60–120s
-      const delay = 60000 + Math.floor(Math.random() * 60001);
+      const delay = 6000 + Math.floor(Math.random() * 6001);
       await new Promise((resolve) => setTimeout(resolve, delay));
     }
   } catch (e) {
