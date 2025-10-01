@@ -18,6 +18,8 @@ const META_HEADERS = {
   Authorization: `Bearer ${META_TOKEN}`,
   "Content-Type": "application/json",
 };
+// ====== HISTÓRICO ======
+const historicoMensagens = []; // guarda todas as mensagens recebidas
 
 // ====== EXPRESS ======
 const app = express();
