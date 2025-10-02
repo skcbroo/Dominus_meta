@@ -281,7 +281,7 @@ app.post("/webhook", async (req, res) => {
         }
 
         // 1) Se conhecemos o item do JSON e o nome do WhatsApp veio, checa concordância
-        if (clienteJson && nomeZap && !nomesConcordam(clienteJson.reclamante, nomeZap)) {
+      /*  if (clienteJson && nomeZap && !nomesConcordam(clienteJson.reclamante, nomeZap)) {
           const esperado = extrairPrimeiroNome(clienteJson.reclamante);
           const recebido = extrairPrimeiroNome(nomeZap);
 
@@ -303,7 +303,7 @@ app.post("/webhook", async (req, res) => {
           if (procKey) await tentarProximoNumeroDoGrupo(procKey, from);
 
           continue; // não processa SIM/NÃO para este número
-        }
+        }*/
 
         // 2) Fluxo normal (SIM / NÃO / outro)
         if (ehAfirmação(body)) {
