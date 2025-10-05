@@ -296,10 +296,11 @@ app.post("/webhook", async (req, res) => {
                         if (ehAfirmação(body)) {
                             await sendText(
                                 from,
-                                `Perfeito! ✅ Para agilizar sua proposta, me envie:\n` +
-                                `• Número do processo (se não souber, avise que já chamamos um analista para ajudar)\n` +
-                                `• Seu nome completo\n` +
-                                `• Valor aproximado a receber`
+                                `Perfeito! ✅ Para agilizar sua proposta, me envie\n` +
+                                `• Número do processo:\n` +
+                                `• Nome completo:\n` +
+                                `• Valor aproximado a receber:\n\n` +
+                                `(se não souber, avise que já chamamos um analista para ajudar)`
                             );
                             leadState.set(from, "aguardando_dados");
                             //await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: body, origem: "passivo" });
