@@ -298,8 +298,8 @@ app.post("/webhook", async (req, res) => {
                                 from,
                                 `Perfeito! ✅ Para agilizar sua proposta, me envie\n` +
                                 `• Número do processo:\n` +
-                                `• Nome completo:\n` +
-                                `• Valor aproximado a receber:\n\n` +
+                                `• Nome completo:\n\n` +
+                                
                                 `(se não souber, avise que já chamamos um analista para ajudar)`
                             );
                             leadState.set(from, "aguardando_dados");
