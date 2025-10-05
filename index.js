@@ -401,10 +401,17 @@ app.get("/webhook", (req, res) => {
 app.get("/healthz", (_req, res) => {
     res.json({ ok: true, provider: "meta" });
 });
-app.get("/send-all", async (_req, res) => {
+
+app.get("/send-all", async (req, res) => {
+    const token = req.headers["x-admin-token"];
+    if (token !== process.env.ADMIN_SECRET) {
+        return res.status(403).json({ error: "Acesso negado" });
+    }
+
     enviarMensagemParaNumeros();
     res.json({ ok: true, started: true });
 });
+
 // ====== ROTA PARA CONSULTAR HISTÓRICO ======
 app.get("/mensagens", (_req, res) => {
     res.json(historicoMensagens);
