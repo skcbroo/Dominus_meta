@@ -403,7 +403,7 @@ app.get("/healthz", (_req, res) => {
 });
 
 app.get("/send-all", async (req, res) => {
-    const token = req.headers["x-admin-token"];
+    const token = req.query.token || req.headers["x-admin-token"];
     if (token !== process.env.ADMIN_SECRET) {
         return res.status(403).json({ error: "Acesso negado" });
     }
@@ -411,6 +411,7 @@ app.get("/send-all", async (req, res) => {
     enviarMensagemParaNumeros();
     res.json({ ok: true, started: true });
 });
+
 
 // ====== ROTA PARA CONSULTAR HISTÓRICO ======
 app.get("/mensagens", (_req, res) => {
