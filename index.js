@@ -403,7 +403,7 @@ app.get("/healthz", (_req, res) => {
 });
 
 app.get("/send-all", async (req, res) => {
-    const token = req.query.token || req.headers["x-admin-token"];
+    const token = req.headers["token"];
     if (token !== process.env.ADMIN_SECRET) {
         return res.status(403).json({ error: "Acesso negado" });
     }
