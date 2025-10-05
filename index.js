@@ -296,7 +296,8 @@ app.post("/webhook", async (req, res) => {
                         if (ehAfirmação(body)) {
                             await sendText(
                                 from,
-                                `Perfeito! ✅ Para agilizar sua proposta, me envie\n` +
+                                ` ✅Perfeito!\n`+
+                                `Para agilizar sua proposta, envie\n\n` +
                                 `• Número do processo:\n` +
                                 `• Nome completo:\n\n` +
                                 
