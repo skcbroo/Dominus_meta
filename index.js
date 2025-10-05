@@ -123,25 +123,38 @@ async function sendText(toE164, text) {
 }
 
 // ====== LOG ADM ======
-async function enviarLogADM({ clienteJson, nomeZap, numero, resposta }) {
+async function enviarLogADM({ clienteJson, nomeZap, numero, resposta, origem = "ativo" }) {
     if (!ADMIN_NUMBER) {
         console.warn("⚠️ ADMIN_NUMBER não definido no .env");
         return;
     }
     try {
-        const textoLog = `📬 *Resposta recebida*
-• Nome (JSON): ${clienteJson?.reclamante || "(não informado)"}
-• Telefone (JSON): ${clienteJson?.telefone || "(não informado)"}
-• Processo: ${clienteJson?.numero_processo || "(não informado)"}
-• Nome no WhatsApp: ${nomeZap || "(desconhecido)"}
-• Número (WhatsApp): ${numero}
-• Resposta: ${resposta || "(vazio)"}`;
+        let textoLog = "";
+
+        if (origem === "passivo") {
+            // Lead passivo (não veio do JSON)
+            textoLog = `📬 *Novo Lead Passivo*\n` +
+                `• Nome no WhatsApp: ${nomeZap || "(desconhecido)"}\n` +
+                `• Número (WhatsApp): ${numero}\n` +
+                `• Resposta final: ${resposta || "(vazio)"}`;
+        } else {
+            // Lead ativo (do JSON)
+            textoLog = `📬 *Resposta recebida (Lead Ativo)*\n` +
+                `• Nome (JSON): ${clienteJson?.reclamante || "(não informado)"}\n` +
+                `• Telefone (JSON): ${clienteJson?.telefone || "(não informado)"}\n` +
+                `• Processo: ${clienteJson?.numero_processo || "(não informado)"}\n` +
+                `• Nome no WhatsApp: ${nomeZap || "(desconhecido)"}\n` +
+                `• Número (WhatsApp): ${numero}\n` +
+                `• Resposta final: ${resposta || "(vazio)"}`;
+        }
+
         await sendText(ADMIN_NUMBER, textoLog);
-        console.log(`📤 Log enviado ao ADM (${ADMIN_NUMBER})`);
+        console.log(`📤 Log enviado ao ADM (${ADMIN_NUMBER}) [${origem}]`);
     } catch (e) {
         console.error("❌ Falha ao enviar log para ADM:", e.response?.data || e.message);
     }
 }
+
 
 // ====== ESTADO (MAPAS) ======
 const clientePorNumero = new Map();    // numeroE164 -> objeto do JSON inteiro
@@ -272,11 +285,12 @@ app.post("/webhook", async (req, res) => {
                     // etapa finalizado → não reabrir fluxo
                     if (state === "finalizado") {
                         await sendText(from, "Obrigado pelo contato! 🙏 Já registramos sua resposta e não é necessário reenviar.");
-                        await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo já finalizado → ${body}` });
+                       // await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: body, origem: "passivo" });
+                        leadState.set(from, "aguardando_confirmacao");
                         continue;
                     }
 
-                    // etapa 1: aguardando confirmação inicial
+
                     // etapa 1: aguardando confirmação inicial
                     if (state === "aguardando_confirmacao") {
                         if (ehAfirmação(body)) {
@@ -288,12 +302,13 @@ app.post("/webhook", async (req, res) => {
                                 `• Valor aproximado a receber`
                             );
                             leadState.set(from, "aguardando_dados");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo CONFIRMOU → ${body}` });
+                            //await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: body, origem: "passivo" });
 
                         } else if (ehNegacao(body)) {
                             await sendText(from, "Sem problemas 👍. Obrigado pelo contato! Ficamos à disposição.");
                             leadState.set(from, "finalizado");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo RECUSOU → ${body}` });
+                            //await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: body, origem: "passivo" });
+
 
                         } else {
                             await sendText(
@@ -312,7 +327,7 @@ app.post("/webhook", async (req, res) => {
                                 `Se não quiser, basta responder *NÃO* e encerramos o contato 🤝`
                             );
                             leadState.set(from, "aguardando_confirmacao");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo inicial/ inválido → ${body}` });
+                            //await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: body, origem: "passivo" });
                         }
                         continue;
                     }
@@ -323,7 +338,7 @@ app.post("/webhook", async (req, res) => {
                         if (body && body.length > 5 && !ehAfirmação(body) && !ehNegacao(body)) {
                             await sendText(from, "Obrigado! 🙏 Vamos analisar e um analista entrará em contato.");
                             leadState.set(from, "finalizado");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo enviou dados → ${body}` });
+                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: body, origem: "passivo" });
                         } else {
                             await sendText(from, "Por favor, envie: número do processo, nome completo e valor aproximado.");
                             //await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo dado inválido → ${body}` });
@@ -334,38 +349,31 @@ app.post("/webhook", async (req, res) => {
                     continue; // segurança extra
                 }
 
-
-
-
                 // 2) Fluxo normal (SIM / NÃO / outro)
                 if (ehAfirmação(body)) {
                     await sendText(
                         from,
                         "Excelente! ✅ Vou encaminhar seus dados para análise. Em breve um analista entrará em contato."
                     );
-                    await enviarLogADM({
-                        clienteJson,
-                        nomeZap,
-                        numero: from,
-                        resposta: body || "SIM",
-                    });
+                    leadState.set(from, "finalizado");
+                    await enviarLogADM({ clienteJson, nomeZap, numero: from, resposta: body, origem: "ativo" });
+
                 } else if (ehNegacao(body)) {
                     await sendText(
                         from,
                         "Entendo, obrigado pela atenção 🙏. Continuamos à disposição caso mude de ideia."
                     );
-                    await enviarLogADM({
-                        clienteJson,
-                        nomeZap,
-                        numero: from,
-                        resposta: body || "NÃO",
-                    });
+                    leadState.set(from, "finalizado");
+                    //await enviarLogADM({ clienteJson, nomeZap, numero: from, resposta: body, origem: "ativo" });
+
                 } else {
                     await sendText(
                         from,
-                        "Olá! 😊 Responda apenas *SIM* para receber a proposta ou *NÃO* para encerrar o contato."
+                        "Olá! 😊 Para prosseguir preciso que responda apenas *SIM* ou *NÃO*. Caso prefira, um analista pode te ligar diretamente 📞."
                     );
+                    // aqui você poderia adicionar um "contador de tentativas" se quiser limitar
                 }
+
             }
         }
     } catch (e) {
