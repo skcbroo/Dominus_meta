@@ -262,48 +262,83 @@ app.post("/webhook", async (req, res) => {
         // fim historico
 
         // 🚫 Se número não está no JSON → ignora (não responde)
+        // ====== VIA PASSIVA ======
         if (!clienteJson) {
-          console.log("📩 Mensagem de número DESCONHECIDO (ignorado):", {
-            from,
-            body,
-            nomeZap,
-          });
+          console.log("🆕 Lead passivo detectado:", { from, body, nomeZap });
 
-          // opcional: logar no admin
-          await enviarLogADM({
-            clienteJson: null,
-            nomeZap,
-            numero: from,
-            resposta: `(ignorado, lead desconhecido) → ${body}`,
-          });
+          // checa se já houve interação antes
+          const historicoDoNumero = historicoMensagens.filter(m => m.from === from);
+          const primeiraMsg = historicoDoNumero.length === 1; // só a inicial
 
-          continue; // não responde esse contato
+          if (primeiraMsg) {
+            // Mensagem inicial de apresentação + pedido de confirmação
+            await sendText(
+              from,
+              `Olá ${primeiroNomeFormatado(nomeZap)}! 👋\n` +
+              `Somos especialistas na compra de créditos judiciais trabalhistas.\n\n` +
+              `Podemos analisar seu processo e apresentar uma proposta de compra, oferecendo liquidez rápida para você.\n\n` +
+              `👉 Gostaria de receber uma proposta? Responda *SIM* ou *NÃO*.`
+            );
+
+            await enviarLogADM({
+              clienteJson: null,
+              nomeZap,
+              numero: from,
+              resposta: `(lead passivo inicial) → ${body}`,
+            });
+
+            continue;
+          }
+
+          // Se não é a primeira msg, trata conforme resposta
+          if (ehAfirmação(body)) {
+            // manda instruções para enviar dados do processo
+            await sendText(
+              from,
+              `Perfeito! ✅ Para agilizar sua proposta, me envie por favor:\n` +
+              `• Número do processo\n` +
+              `• Seu nome completo\n` +
+              `• Valor aproximado a receber`
+            );
+
+            await enviarLogADM({
+              clienteJson: null,
+              nomeZap,
+              numero: from,
+              resposta: `Lead passivo CONFIRMOU interesse → ${body}`,
+            });
+
+          } else if (ehNegacao(body)) {
+            await sendText(
+              from,
+              "Sem problemas 👍. Obrigado pelo contato! Ficamos à disposição caso queira analisar seu processo no futuro."
+            );
+
+            await enviarLogADM({
+              clienteJson: null,
+              nomeZap,
+              numero: from,
+              resposta: `Lead passivo RECUSOU → ${body}`,
+            });
+
+          } else {
+            // qualquer outra coisa (áudio, texto solto, emoji, etc.)
+            await sendText(
+              from,
+              "Desculpe, não consegui entender 🤔. Responda apenas *SIM* se quiser receber uma proposta ou *NÃO* para encerrar."
+            );
+
+            await enviarLogADM({
+              clienteJson: null,
+              nomeZap,
+              numero: from,
+              resposta: `Lead passivo resposta inválida → ${body}`,
+            });
+          }
+
+          continue; // garante que não caia no fluxo ativo
         }
 
-        // 1) Se conhecemos o item do JSON e o nome do WhatsApp veio, checa concordância
-      /*  if (clienteJson && nomeZap && !nomesConcordam(clienteJson.reclamante, nomeZap)) {
-          const esperado = extrairPrimeiroNome(clienteJson.reclamante);
-          const recebido = extrairPrimeiroNome(nomeZap);
-
-          // avisa o contato com educação
-          await sendText(
-            from,
-            `Oi! Tudo bem? Acho que este número não é de ${esperado}. Desconsidere esta mensagem, por favor.`
-          );
-
-          // loga no ADM e tenta o próximo número do mesmo processo
-          await enviarLogADM({
-            clienteJson,
-            nomeZap,
-            numero: from,
-            resposta: `NOME DIVERGENTE (esperado: ${esperado}, WhatsApp: ${recebido}). Buscando próximo número...`,
-          });
-
-          const procKey = clienteJson.numero_processo || null;
-          if (procKey) await tentarProximoNumeroDoGrupo(procKey, from);
-
-          continue; // não processa SIM/NÃO para este número
-        }*/
 
         // 2) Fluxo normal (SIM / NÃO / outro)
         if (ehAfirmação(body)) {
