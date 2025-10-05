@@ -264,7 +264,7 @@ app.post("/webhook", async (req, res) => {
                 if (historicoMensagens.length > 1000) historicoMensagens.shift();
                 // fim historico
 
-             
+
                 // ====== VIA PASSIVA → lead novo que não está no JSON
                 if (!clienteJson) {
                     const state = leadState.get(from) || "aguardando_confirmacao";
@@ -277,37 +277,45 @@ app.post("/webhook", async (req, res) => {
                     }
 
                     // etapa 1: aguardando confirmação inicial
-                   // etapa 1: aguardando confirmação inicial
-if (state === "aguardando_confirmacao") {
-    if (ehAfirmação(body)) {
-        await sendText(
-            from,
-            `Perfeito! ✅ Para agilizar sua proposta, me envie:\n` +
-            `• Número do processo (se não souber, avise que já chamamos um analista para ajudar)\n` +
-            `• Seu nome completo\n` +
-            `• Valor aproximado a receber`
-        );
-        leadState.set(from, "aguardando_dados");
-        await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo CONFIRMOU → ${body}` });
+                    // etapa 1: aguardando confirmação inicial
+                    if (state === "aguardando_confirmacao") {
+                        if (ehAfirmação(body)) {
+                            await sendText(
+                                from,
+                                `Perfeito! ✅ Para agilizar sua proposta, me envie:\n` +
+                                `• Número do processo (se não souber, avise que já chamamos um analista para ajudar)\n` +
+                                `• Seu nome completo\n` +
+                                `• Valor aproximado a receber`
+                            );
+                            leadState.set(from, "aguardando_dados");
+                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo CONFIRMOU → ${body}` });
 
-    } else if (ehNegacao(body)) {
-        await sendText(from, "Sem problemas 👍. Obrigado pelo contato! Ficamos à disposição.");
-        leadState.set(from, "finalizado");
-        await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo RECUSOU → ${body}` });
+                        } else if (ehNegacao(body)) {
+                            await sendText(from, "Sem problemas 👍. Obrigado pelo contato! Ficamos à disposição.");
+                            leadState.set(from, "finalizado");
+                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo RECUSOU → ${body}` });
 
-    } else {
-        await sendText(
-            from,
-            `Olá ${primeiroNomeFormatado(nomeZap)}! 👋\n` +
-            `Somos especialistas na compra de créditos judiciais trabalhistas.\n\n` +
-            `Podemos analisar seu processo e apresentar uma proposta de compra, oferecendo liquidez rápida para você.\n\n` +
-            `👉 Gostaria de receber uma proposta? Responda *SIM* ou *NÃO*.`
-        );
-        leadState.set(from, "aguardando_confirmacao");
-        await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo inicial/ inválido → ${body}` });
-    }
-    continue;
-}
+                        } else {
+                            await sendText(
+                                from,
+                                `Olá ${primeiroNomeFormatado(nomeZap)}! 👋\n` +
+
+                                `Sou Daniel, assistente virtual da *Dominus Ativos Judiciais*, você possui interesse em vender seu crédito trabalhista?\n\n` +
+                                `💡 *O que fazemos:* compramos o seu processo e pagamos *à vista em dinheiro*, sem precisar esperar o final da ação.\n\n` +
+                                `✅ Não pedimos qualquer valor, nossa intenção é *comprar*, não vender\n` +
+                                `✅ Não pedimos senha nem código\n` +
+                                `✅ Contrato simples, assinado pelo celular\n` +
+                                `✅ Pagamento por PIX/TED com comprovante\n` +
+                                `✅ Se preferir, falamos com seu advogado\n\n` +
+                                `Posso mandar seu caso agora para análise e te envio uma proposta ainda esta semana, sem compromisso! 😃\n\n` +
+                                `👉 Responda *SIM* para receber uma proposta.\n` +
+                                `Se não quiser, basta responder *NÃO* e encerramos o contato 🤝`
+                            );
+                            leadState.set(from, "aguardando_confirmacao");
+                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo inicial/ inválido → ${body}` });
+                        }
+                        continue;
+                    }
 
 
                     // etapa 2: aguardando dados do processo
@@ -318,7 +326,7 @@ if (state === "aguardando_confirmacao") {
                             await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo enviou dados → ${body}` });
                         } else {
                             await sendText(from, "Por favor, envie: número do processo, nome completo e valor aproximado.");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo dado inválido → ${body}` });
+                            //await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo dado inválido → ${body}` });
                         }
                         continue;
                     }
