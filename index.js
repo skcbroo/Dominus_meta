@@ -277,36 +277,38 @@ app.post("/webhook", async (req, res) => {
                     }
 
                     // etapa 1: aguardando confirmação inicial
-                    if (state === "aguardando_confirmacao") {
-                        if (ehAfirmação(body)) {
-                            await sendText(
-                                from,
-                                `Perfeito! ✅ Para agilizar sua proposta, me envie:\n` +
-                                `• Número do processo\n` +
-                                `• Seu nome completo\n` +
-                                `• Valor aproximado a receber`
-                            );
-                            leadState.set(from, "aguardando_dados");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo CONFIRMOU → ${body}` });
+                   // etapa 1: aguardando confirmação inicial
+if (state === "aguardando_confirmacao") {
+    if (ehAfirmação(body)) {
+        await sendText(
+            from,
+            `Perfeito! ✅ Para agilizar sua proposta, me envie:\n` +
+            `• Número do processo (se não souber, avise que já chamamos um analista para ajudar)\n` +
+            `• Seu nome completo\n` +
+            `• Valor aproximado a receber`
+        );
+        leadState.set(from, "aguardando_dados");
+        await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo CONFIRMOU → ${body}` });
 
-                        } else if (ehNegacao(body)) {
-                            await sendText(from, "Sem problemas 👍. Obrigado pelo contato! Ficamos à disposição.");
-                            leadState.set(from, "finalizado");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo RECUSOU → ${body}` });
+    } else if (ehNegacao(body)) {
+        await sendText(from, "Sem problemas 👍. Obrigado pelo contato! Ficamos à disposição.");
+        leadState.set(from, "finalizado");
+        await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo RECUSOU → ${body}` });
 
-                        } else {
-                            await sendText(
-                                from,
-                                `Olá ${primeiroNomeFormatado(nomeZap)}! 👋\n` +
-                                `Somos especialistas na compra de créditos judiciais trabalhistas.\n\n` +
-                                `Podemos analisar seu processo e apresentar uma proposta de compra, oferecendo liquidez rápida para você.\n\n` +
-                                `👉 Gostaria de receber uma proposta? Responda *SIM* ou *NÃO*.`
-                            );
-                            leadState.set(from, "aguardando_confirmacao");
-                            await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo inicial/ inválido → ${body}` });
-                        }
-                        continue;
-                    }
+    } else {
+        await sendText(
+            from,
+            `Olá ${primeiroNomeFormatado(nomeZap)}! 👋\n` +
+            `Somos especialistas na compra de créditos judiciais trabalhistas.\n\n` +
+            `Podemos analisar seu processo e apresentar uma proposta de compra, oferecendo liquidez rápida para você.\n\n` +
+            `👉 Gostaria de receber uma proposta? Responda *SIM* ou *NÃO*.`
+        );
+        leadState.set(from, "aguardando_confirmacao");
+        await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: `Lead passivo inicial/ inválido → ${body}` });
+    }
+    continue;
+}
+
 
                     // etapa 2: aguardando dados do processo
                     if (state === "aguardando_dados") {
