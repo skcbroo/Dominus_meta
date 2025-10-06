@@ -296,7 +296,6 @@ app.post("/webhook", async (req, res) => {
                         if (ehAfirmação(body)) {
                             await sendText(
                                 from,
-                                ` ✅Perfeito!\n`+
                                 `Para agilizar sua proposta, envie\n\n` +
                                 `• Número do processo:\n` +
                                 `• Nome completo:\n\n` +
@@ -315,7 +314,7 @@ app.post("/webhook", async (req, res) => {
                         } else {
                             await sendText(
                                 from,
-                                `Olá ${primeiroNomeFormatado(nomeZap)}! 👋\n` +
+                                `Olá ${primeiroNomeFormatado(nomeZap)}! 👋\n\n` +
 
                                 `Sou Daniel, assistente virtual da *Dominus Ativos Judiciais*, você possui interesse em vender seu crédito trabalhista?\n\n` +
                                 `💡 *O que fazemos:* compramos o seu processo e pagamos *à vista em dinheiro*, sem precisar esperar o final da ação.\n\n` +
@@ -338,7 +337,7 @@ app.post("/webhook", async (req, res) => {
                     // etapa 2: aguardando dados do processo
                     if (state === "aguardando_dados") {
                         if (body && body.length > 5 && !ehAfirmação(body) && !ehNegacao(body)) {
-                            await sendText(from, "Obrigado! 🙏 Vamos analisar e um analista entrará em contato.");
+                            await sendText(from, "✅Perfeito! Vamos analisar e um analista entrará em contato.");
                             leadState.set(from, "finalizado");
                             await enviarLogADM({ clienteJson: null, nomeZap, numero: from, resposta: body, origem: "passivo" });
                         } else {
