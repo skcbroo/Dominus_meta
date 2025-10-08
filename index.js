@@ -140,7 +140,8 @@ async function enviarLogADM({ clienteJson, nomeZap, numero, resposta, origem = "
         } else {
             // Lead ativo (do JSON)
             textoLog = `📬 *Resposta recebida (Lead Ativo)*\n` +
-                `• Nome (JSON): ${clienteJson?.reclamante || "(não informado)"}\n` +
+                `• Nome (JSON): ${clienteJson?.reclamada || "(não informado)"}\n` +
+                `• Empresa (JSON): ${clienteJson?.reclamante || "(não informado)"}\n` +
                 `• Telefone (JSON): ${clienteJson?.telefone || "(não informado)"}\n` +
                 `• Processo: ${clienteJson?.numero_processo || "(não informado)"}\n` +
                 `• Nome no WhatsApp: ${nomeZap || "(desconhecido)"}\n` +
