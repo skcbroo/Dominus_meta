@@ -1,31 +1,4 @@
 [
-   {
-    "classeProcesso": "AIRR",
-    "numero_processo": "0100610-20.2022.5.01.0432",
-    "estado": "Rio de Janeiro",
-    "reclamante": "GRUPO CASAS BAHIA S.A.",
-    "reclamada": "PAULO VINICIUS ARAUJO DE SOUZA",
-    "valor_da_causa": null,
-    "telefone": "+55 22 99717-5426"
-  },
-  {
-    "classeProcesso": "AIRR",
-    "numero_processo": "0100639-98.2023.5.01.0282",
-    "estado": "Rio de Janeiro",
-    "reclamante": "PETROLEO BRASILEIRO S A PETROBRAS",
-    "reclamada": "JORGE SILVESTRE LUZ",
-    "valor_da_causa": null,
-    "telefone": "+55 71 99144-0780, +55 71 97812-7514"
-  },
-  {
-    "classeProcesso": "AIRR",
-    "numero_processo": "0100882-27.2023.5.01.0481",
-    "estado": "Rio de Janeiro",
-    "reclamante": "PETROLEO BRASILEIRO S A PETROBRAS",
-    "reclamada": "BRUNO BESSA TEIXEIRA",
-    "valor_da_causa": null,
-    "telefone": "+55 22 99256-8953"
-  },
   {
     "classeProcesso": "AIRR",
     "numero_processo": "0101052-78.2017.5.01.0070",
@@ -898,5 +871,1184 @@
     "reclamada": "ALYNE ALVES DE OLIVEIRA",
     "valor_da_causa": null,
     "telefone": "+55 62 98558-9064, +55 62 98188-0524, +55 62 98559-9064"
+  },
+     {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010319-15.2024.5.03.0022",
+    "estado": "Minas Gerais",
+    "reclamante": "BANCO SANTANDER (BRASIL) S.A.",
+    "reclamada": "MARIANNA INES GOMES RIBEIRO",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99657-4626, +55 31 99819-9496, +55 31 99981-9949"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010478-70.2024.5.03.0114",
+    "estado": "Minas Gerais",
+    "reclamante": "ALMAVIVA EXPERIENCE S.A.",
+    "reclamada": "LUCAS CORDEIRO PROCOPIO DE CARVALHO",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98460-8839, +55 31 98945-8908, +55 31 98295-3531, +55 31 99463-5868"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010479-67.2022.5.03.0165",
+    "estado": "Minas Gerais",
+    "reclamante": "VALE S.A.",
+    "reclamada": "JOB LINO DE CASTRO",
+    "valor_da_causa": null,
+    "telefone": "+55 31 97118-6580"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010561-58.2021.5.03.0028",
+    "estado": "Minas Gerais",
+    "reclamante": "VALE S.A.",
+    "reclamada": "IEDA MARIA CONGO E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99671-7480"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010572-74.2023.5.18.0101",
+    "estado": "Goiás",
+    "reclamante": "VIDEPLAST INDUSTRIA DE EMBALAGENS LTDA",
+    "reclamada": "ROBERTO SERAFIM DE CARVALHO",
+    "valor_da_causa": null,
+    "telefone": "+55 64 98147-7460, +55 64 98138-1370"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010593-16.2020.5.03.0152",
+    "estado": "Minas Gerais",
+    "reclamante": "MOSAIC FERTILIZANTES P&K LTDA.",
+    "reclamada": "VINICIUS DOS REIS AMORIM",
+    "valor_da_causa": null,
+    "telefone": "+55 34 99233-8895, +55 34 98891-8166, +55 34 99912-8327, +55 34 98819-2325"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011053-60.2022.5.03.0078",
+    "estado": "Minas Gerais",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "JOSE WILIAN GUIZILINI",
+    "valor_da_causa": null,
+    "telefone": "+55 32 99998-1726, +55 32 99810-1318"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011159-10.2023.5.03.0103",
+    "estado": "Minas Gerais",
+    "reclamante": "SALVADOR LOGISTICA E TRANSPORTES LTDA",
+    "reclamada": "ADRIANO JORGE COELHO DOS SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 34 99153-2974"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011177-91.2015.5.03.0109",
+    "estado": "Minas Gerais",
+    "reclamante": "MRS LOGISTICA S/A",
+    "reclamada": "ARILSON WAGNER SILVEIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99604-2106"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011348-67.2019.5.15.0014",
+    "estado": "São Paulo",
+    "reclamante": "OSLO EMPREENDIMENTOS IMOBILIARIOS LTDA. E OUTROS (1)",
+    "reclamada": "ALEXSANDRO SEBASTIAO DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 81 97814-1207"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011602-38.2022.5.15.0013",
+    "estado": "São Paulo",
+    "reclamante": "EMBRAER S.A. E OUTROS (1)",
+    "reclamada": "EDVALDO HUNGARO",
+    "valor_da_causa": null,
+    "telefone": "+55 12 99140-5828, +55 12 99748-2527, +55 12 99730-0035"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011620-96.2017.5.15.0122",
+    "estado": "São Paulo",
+    "reclamante": "BMB BELGO MINEIRA BEKAERT ARTEFATOS DE ARAME LTDA",
+    "reclamada": "ADRIANO JESUS DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 47 99998-5146"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0011666-66.2017.5.03.0107",
+    "estado": "Minas Gerais",
+    "reclamante": "LIBBS FARMACEUTICA LTDA",
+    "reclamada": "IZABELA SALES ROCHA DELUCCA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99142-6906"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0011868-43.2020.5.15.0062",
+    "estado": "São Paulo",
+    "reclamante": "JBS S/A",
+    "reclamada": "MANUEL DA LAPA DA CONCEICAO",
+    "valor_da_causa": null,
+    "telefone": "+55 13 98150-8222"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011970-23.2021.5.15.0097",
+    "estado": "São Paulo",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "JAIR RODRIGUES DOS SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 11 96067-3197"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0012018-02.2022.5.15.0079",
+    "estado": "São Paulo",
+    "reclamante": "RAIZEN ARARAQUARA ACUCAR E ALCOOL LTDA",
+    "reclamada": "ORLANDO DE JESUS",
+    "valor_da_causa": null,
+    "telefone": "+55 19 98303-6818"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0012528-30.2016.5.15.0045",
+    "estado": "São Paulo",
+    "reclamante": "GENERAL MOTORS DO BRASIL LTDA",
+    "reclamada": "NELSON NATANAEL DE SOUZA",
+    "valor_da_causa": null,
+    "telefone": "+55 12 98242-2901"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0016219-18.2020.5.16.0002",
+    "estado": "Maranhão",
+    "reclamante": "ALCOA ALUMINIO S/A E OUTROS (2)",
+    "reclamada": "JOANILSON MENDONCA BASTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 98 98767-9566"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0024935-95.2023.5.24.0005",
+    "estado": "Mato Grosso do Sul",
+    "reclamante": "TELEMONT ENGENHARIA DE TELECOMUNICACOES S/A",
+    "reclamada": "EZEQUIEL DIAS RODRIGUES",
+    "valor_da_causa": null,
+    "telefone": "+55 67 99943-8503"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100191-21.2023.5.01.0058",
+    "estado": "Rio de Janeiro",
+    "reclamante": "BEM ESTAR AGUA E BEBIDAS LTDA",
+    "reclamada": "DIOGO DA SILVA CRUZ",
+    "valor_da_causa": null,
+    "telefone": "+55 21 98653-7006, +55 21 98927-4672, +55 21 99246-2185"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100259-89.2021.5.01.0009",
+    "estado": "Rio de Janeiro",
+    "reclamante": "CALCADOS MEIER 04 LTDA - EPP",
+    "reclamada": "REBECA SANTOS DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 11 98466-4949"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100423-48.2022.5.01.0226",
+    "estado": "Rio de Janeiro",
+    "reclamante": "RIO DE JANEIRO REFRESCOS LTDA",
+    "reclamada": "DIEGO RIBEIRO LEANDRO",
+    "valor_da_causa": null,
+    "telefone": "+55 21 97002-6107"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100491-66.2021.5.01.0053",
+    "estado": "Rio de Janeiro",
+    "reclamante": "SOCIEDADE DE ENSINO SUPERIOR ESTACIO DE SA LTDA",
+    "reclamada": "NADIA REGINA BARBOSA DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 21 99192-4173"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100607-47.2022.5.01.0341",
+    "estado": "Rio de Janeiro",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "EDERSON MOURA CASTRO",
+    "valor_da_causa": null,
+    "telefone": "+55 24 99994-3645, +55 24 99813-2870"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000117-29.2023.5.02.0020",
+    "estado": "São Paulo",
+    "reclamante": "ZAMP S.A.",
+    "reclamada": "ROSIMEIRE SOARES PELLOZZO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 97278-7912, +55 11 97339-7918, +55 11 97399-3666, +55 11 97523-5759, +55 19 99737-7616, +55 11 98928-2970"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000285-64.2024.5.02.0321",
+    "estado": "São Paulo",
+    "reclamante": "SWISSPORT BRASIL LTDA",
+    "reclamada": "ANTONIA JACINTO GOMES",
+    "valor_da_causa": null,
+    "telefone": "+55 11 96445-2201"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000296-16.2019.5.02.0080",
+    "estado": "São Paulo",
+    "reclamante": "SAO PAULO TURISMO S/A",
+    "reclamada": "PEDRO CESAR ZANGEROLAMO",
+    "valor_da_causa": null,
+    "telefone": "+55 18 99738-4912, +55 18 99793-3854, +55 11 97336-8750, +55 18 98132-8750, +55 18 99587-7739"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000369-16.2024.5.02.0402",
+    "estado": "São Paulo",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "AUGUSTO CESAR CASCARELLI",
+    "valor_da_causa": null,
+    "telefone": "+55 13 99807-1903"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000462-08.2024.5.02.0069",
+    "estado": "São Paulo",
+    "reclamante": "PRO SECURITY SEGURANCA PATRIMONIAL LTDA",
+    "reclamada": "GUILHERME DOS SANTOS SORIANO E OUTROS (2)",
+    "valor_da_causa": null,
+    "telefone": "+55 11 95276-8287"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001241-68.2023.5.02.0013",
+    "estado": "São Paulo",
+    "reclamante": "COMERCIAL AUTOMOTIVA S.A.",
+    "reclamada": "ANDREWS SANTANA DA SILVA E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 11 99795-2842"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001248-09.2023.5.02.0709",
+    "estado": "São Paulo",
+    "reclamante": "POLO JACK LTDA",
+    "reclamada": "STEPHANIE DE ABREU SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 13 99185-2867, +55 13 98133-5678, +55 13 99782-8874"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001543-53.2023.5.02.0060",
+    "estado": "São Paulo",
+    "reclamante": "OSTUNI ADMINISTRACAO HOTELEIRA LTDA",
+    "reclamada": "KAROLINE YASMIN SILVA CONCEICAO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 99309-5535"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001653-54.2023.5.02.0027",
+    "estado": "São Paulo",
+    "reclamante": "GP - GUARDA PATRIMONIAL DE SAO PAULO LTDA.",
+    "reclamada": "NELTON REGIS SOL POSTO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 98124-0259, +55 11 97420-1404"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000005-18.2023.5.09.0009",
+    "estado": "Paraná",
+    "reclamante": "CANAN & REIS COMERCIO DE CARNES LTDA - ME",
+    "reclamada": "ANDRE MARCOS RAYMUNDO",
+    "valor_da_causa": null,
+    "telefone": "+55 41 98895-0095"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000093-12.2024.5.09.0659",
+    "estado": "Paraná",
+    "reclamante": "PROTEGE S/A PROTECAO E TRANSPORTE DE VALORES",
+    "reclamada": "MOESES RODRIGO KOLODY",
+    "valor_da_causa": null,
+    "telefone": "+55 42 98416-5236"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000114-47.2023.5.20.0002",
+    "estado": "Sergipe",
+    "reclamante": "ALMAVIVA EXPERIENCE S.A.",
+    "reclamada": "STHEFANY CHAGAS MARTINS",
+    "valor_da_causa": null,
+    "telefone": "+55 79 99988-4332"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000134-31.2015.5.03.0054",
+    "estado": "Minas Gerais",
+    "reclamante": "CSN MINERACAO S.A.",
+    "reclamada": "ALEXANDRE FIDELIS DE AMORIM E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99228-8481, +55 31 98728-7301"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000136-92.2019.5.05.0025",
+    "estado": "Bahia",
+    "reclamante": "VITALMED - SERVICOS DE EMERGENCIA MEDICA LTDA",
+    "reclamada": "TANIA NERY SOUZA BISPO",
+    "valor_da_causa": null,
+    "telefone": "+55 71 98872-0373"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000164-27.2023.5.09.0084",
+    "estado": "Paraná",
+    "reclamante": "SUPERMERCADO JACOMAR LTDA",
+    "reclamada": "JOSE CARLOS CORREIA DA SILVA E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 41 99835-8869, +55 41 99871-2199, +55 41 99631-3046, +55 41 99871-2100"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000191-94.2020.5.09.0672",
+    "estado": "Paraná",
+    "reclamante": "PERNAMBUCO CONSTRUCOES E MONTAGEM INDUSTRIAL LOGISTICA E TRANSPORTES LTDA E OUTROS (1)",
+    "reclamada": "LOURIVAL EUCLIDES DE ALMEIDA FILHO",
+    "valor_da_causa": null,
+    "telefone": "+55 41 99866-1798, +55 75 99132-9861, +55 22 99285-6993, +55 75 98132-3959, +55 21 98285-7890"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0000201-18.2023.5.08.0202",
+    "estado": "Pará",
+    "reclamante": "99 TECNOLOGIA LTDA E OUTROS (2)",
+    "reclamada": "GILSONBERTO DOS SANTOS FERREIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 96 99917-6801"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000258-64.2023.5.06.0146",
+    "estado": "Pernambuco",
+    "reclamante": "CAPRICCHE S.A.",
+    "reclamada": "ERICK FELIPE LISBOA GALVAO DE LIMA",
+    "valor_da_causa": null,
+    "telefone": "+55 81 98232-5858, +55 81 98449-8863, +55 81 98449-8896, +55 81 98735-5880"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000428-69.2023.5.10.0002",
+    "estado": "Distrito Federal",
+    "reclamante": "SECURITY SERVICOS AUXILIARES DE TRANSPORTE AEREO LTDA",
+    "reclamada": "BRUNNO LEONARDO DA SILVA CARVALHO",
+    "valor_da_causa": null,
+    "telefone": "+55 61 98230-7029"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000513-76.2019.5.10.0008",
+    "estado": "Distrito Federal",
+    "reclamante": "TRANSFEDERAL TRANSPORTE DE VALORES LTDA",
+    "reclamada": "JOAO MARCELO DOS SANTOS GOMES",
+    "valor_da_causa": null,
+    "telefone": "+55 61 98450-7021, +55 61 98574-3338"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000580-20.2023.5.06.0232",
+    "estado": "Pernambuco",
+    "reclamante": "HECA COMERCIO E CONSTRUCOES LTDA",
+    "reclamada": "GENIVAL PEDRO DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 81 98833-8666, +55 81 99655-4378"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000596-75.2022.5.07.0039",
+    "estado": "Ceará",
+    "reclamante": "EVSA COMERCIO E SERVICOS INDUSTRIAIS LTDA",
+    "reclamada": "ROMARIO MACEDO ANTUNES",
+    "valor_da_causa": null,
+    "telefone": "+55 85 98117-8687"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000614-92.2022.5.05.0511",
+    "estado": "Bahia",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "ALESSANDRO MOTA DO NASCIMENTO",
+    "valor_da_causa": null,
+    "telefone": "+55 73 98858-5693, +55 33 98817-0351"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000869-20.2023.5.11.0003",
+    "estado": "Amazonas",
+    "reclamante": "VIACAO SAO PEDRO LTDA",
+    "reclamada": "IGO MARCELO MOTA SOARES",
+    "valor_da_causa": null,
+    "telefone": "+55 92 98553-4694, +55 92 99996-5167, +55 92 99232-5851"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000949-33.2021.5.19.0002",
+    "estado": "Alagoas",
+    "reclamante": "AUTO VIACAO VELEIRO LTDA",
+    "reclamada": "ELIAS COSMO DOS SANTOS FILHO",
+    "valor_da_causa": null,
+    "telefone": "+55 82 98808-5029, +55 82 98809-1326, +55 82 99977-6980"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0001280-67.2024.5.17.0001",
+    "estado": "Espírito Santo",
+    "reclamante": "TELEMONT ENGENHARIA DE TELECOMUNICACOES S/A",
+    "reclamada": "RAFAEL DO CARMO SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 31 97578-1950, +55 11 99641-9806, +55 11 96419-8066"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0001304-26.2023.5.17.0003",
+    "estado": "Espírito Santo",
+    "reclamante": "CASA & VIDEO BRASIL S.A",
+    "reclamada": "GEANE ALVES DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 27 99754-5791"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0001332-95.2023.5.09.0009",
+    "estado": "Paraná",
+    "reclamante": "JT INTERNATIONAL DISTRIBUIDORA DE CIGARROS LTDA.",
+    "reclamada": "JESSE IGLESIAS GRACIANO",
+    "valor_da_causa": null,
+    "telefone": "+55 47 99944-8358, +55 47 98478-0579"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010082-84.2021.5.03.0054",
+    "estado": "Minas Gerais",
+    "reclamante": "CSN MINERACAO S.A.",
+    "reclamada": "MILTON CIPRIANO DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 96952-8655"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010242-16.2024.5.03.0148",
+    "estado": "Minas Gerais",
+    "reclamante": "GOIASFORTE VIGILANCIA E SEGURANCA LTDA",
+    "reclamada": "GEORGE ANTONIO LEITE DA SILVA E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 31 97301-0500"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010278-49.2024.5.03.0054",
+    "estado": "Minas Gerais",
+    "reclamante": "CSN MINERACAO S.A.",
+    "reclamada": "VALERIO HELENO DA COSTA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99611-6648"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010371-41.2023.5.03.0185",
+    "estado": "Minas Gerais",
+    "reclamante": "TELEMONT ENGENHARIA DE TELECOMUNICACOES S/A",
+    "reclamada": "THIAGO VENANCIO SANTIAGO",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98607-8785"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010388-32.2022.5.03.0179",
+    "estado": "Minas Gerais",
+    "reclamante": "CEMIG DISTRIBUICAO S.A",
+    "reclamada": "MAURICIO JOSE DE CASTILHO",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98805-4581, +55 31 99880-5309, +55 31 98791-7578, +55 31 98735-2345"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010413-44.2022.5.03.0147",
+    "estado": "Minas Gerais",
+    "reclamante": "SUPERMERCADOS BH COMERCIO DE ALIMENTOS S/A",
+    "reclamada": "MONICA BORGES DA COSTA",
+    "valor_da_causa": null,
+    "telefone": "+55 35 99957-3181"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010447-74.2023.5.03.0182",
+    "estado": "Minas Gerais",
+    "reclamante": "METRO BH S.A.",
+    "reclamada": "MARCO TULIO DE ARAUJO",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98744-5327, +55 31 97514-5857, +55 31 99329-3561, +55 31 99781-6952"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010468-61.2024.5.03.0167",
+    "estado": "Minas Gerais",
+    "reclamante": "SAO JORGE SIDERURGIA LTDA",
+    "reclamada": "ELAINE LIMA DOS SANTOS CARMO",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98518-3088, +55 31 99529-6310"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010516-15.2024.5.03.0104",
+    "estado": "Minas Gerais",
+    "reclamante": "BRF S.A.",
+    "reclamada": "JOSIAS PENQUES GOMES",
+    "valor_da_causa": null,
+    "telefone": "+55 34 99141-3666, +55 11 95876-0795"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010628-57.2022.5.03.0167",
+    "estado": "Minas Gerais",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "WANDERLEI JOSE DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 19 97112-3215"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011482-48.2023.5.03.0092",
+    "estado": "Minas Gerais",
+    "reclamante": "ZAMP S.A.",
+    "reclamada": "IOLANDA RODRIGUES BORGES DE SOUSA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98641-2315"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011678-84.2023.5.15.0059",
+    "estado": "São Paulo",
+    "reclamante": "HOTEL SERRA DA ESTRELA LTDA",
+    "reclamada": "JULIANA FERNANDA DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 97544-4695"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0011921-35.2023.5.03.0100",
+    "estado": "Minas Gerais",
+    "reclamante": "UBER DO BRASIL TECNOLOGIA LTDA.",
+    "reclamada": "ADEMILSON BATISTA LIMA",
+    "valor_da_causa": null,
+    "telefone": "+55 38 99118-6492, +55 38 98814-7009"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100592-70.2023.5.01.0203",
+    "estado": "Rio de Janeiro",
+    "reclamante": "DIASE CONSTRUCOES LTDA",
+    "reclamada": "EDWAN DA SILVA FERREIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 21 97673-5264, +55 21 99438-6231"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100609-39.2020.5.01.0227",
+    "estado": "Rio de Janeiro",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "LEANDRO LOPES FERNANDES",
+    "valor_da_causa": null,
+    "telefone": "+55 19 99299-9982, +55 61 99299-9982, +55 34 98403-7554, +55 34 98418-8387, +55 21 99425-4545"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100633-80.2019.5.01.0040",
+    "estado": "Rio de Janeiro",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "VALERIA FRANCISCA DA ROCHA",
+    "valor_da_causa": null,
+    "telefone": "+55 21 99525-8517, +55 21 99515-4653"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100942-23.2022.5.01.0032",
+    "estado": "Rio de Janeiro",
+    "reclamante": "ITAU UNIBANCO S.A.",
+    "reclamada": "NEI DA ROCHA CALVAO",
+    "valor_da_causa": null,
+    "telefone": "+55 21 99983-2237"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0101046-72.2022.5.01.0207",
+    "estado": "Rio de Janeiro",
+    "reclamante": "LIGHT SERVICOS DE ELETRICIDADE S A",
+    "reclamada": "LEANDRO VILAR DE MORAIS",
+    "valor_da_causa": null,
+    "telefone": "+55 21 98309-4544"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0103800-67.2011.5.17.0161",
+    "estado": "Espírito Santo",
+    "reclamante": "PETROLEO BRASILEIRO S A PETROBRAS",
+    "reclamada": "LIGIANE VIEIRA RAIDER E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 27 99713-9399, +55 28 99922-1680"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0168000-89.2008.5.02.0037",
+    "estado": "São Paulo",
+    "reclamante": "GENERAL GISA INCORPORACOES IMOBILIARIAS LTDA - ME",
+    "reclamada": "ANDREA DA SILVA SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 82 98719-0027"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000178-05.2022.5.02.0381",
+    "estado": "São Paulo",
+    "reclamante": "TECSERVICE MONITORAMENTO E SERVICOS LTDA E OUTROS (1)",
+    "reclamada": "FRANK SINATRA",
+    "valor_da_causa": null,
+    "telefone": "+55 17 99181-4763"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000799-23.2020.5.02.0332",
+    "estado": "São Paulo",
+    "reclamante": "ALVO SERVICOS DE LIMPEZA MANUTENCAO PREDIAL E ADMINISTRACAO EM GERAL LTDA - ME",
+    "reclamada": "RITCHIER BELCHIOR DE OLIVEIRA E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 11 97448-6892, +55 11 93245-0053"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001437-33.2022.5.02.0317",
+    "estado": "São Paulo",
+    "reclamante": "CONCESSIONARIA DO AEROPORTO INTERNACIONAL DE GUARULHOS S.A.",
+    "reclamada": "SERGIO LEITE DE CARVALHO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 95994-8902"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "1001483-27.2021.5.02.0068",
+    "estado": "São Paulo",
+    "reclamante": "BANCO ORIGINAL S/A",
+    "reclamada": "ALEXANDRE LORETTI",
+    "valor_da_causa": null,
+    "telefone": "+55 11 98908-4286, +55 11 97673-4810, +55 11 99867-4888, +55 11 99288-7766, +55 11 99429-2646, +55 11 98927-0406, +55 11 97684-0198, +55 11 99240-6259, +55 11 97737-9514, +55 11 98261-3043"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000028-17.2024.5.06.0104",
+    "estado": "Pernambuco",
+    "reclamante": "KAIROS SEGURANCA LTDA",
+    "reclamada": "ALESON PAVAO LOPES",
+    "valor_da_causa": null,
+    "telefone": "+55 81 99437-2064"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000051-74.2025.5.13.0025",
+    "estado": "Paraíba",
+    "reclamante": "99 TECNOLOGIA LTDA",
+    "reclamada": "JOAO PAULO LINS SIQUEIRA DUARTE",
+    "valor_da_causa": null,
+    "telefone": "+55 81 98199-5440, +55 81 99664-1784"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000127-24.2024.5.08.0009",
+    "estado": "Pará",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "FERNANDA NAJLA MOREIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 91 99141-8380"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000371-61.2024.5.13.0025",
+    "estado": "Paraíba",
+    "reclamante": "IFOOD.COM AGENCIA DE RESTAURANTES ONLINE S.A.",
+    "reclamada": "JOSE MARCELO JESUINO PEREIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 83 99603-5296"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000375-91.2023.5.10.0001",
+    "estado": "Distrito Federal",
+    "reclamante": "CIPLAN CIMENTO PLANALTO SA",
+    "reclamada": "WANAS RAMON BUENO VILASCORTI",
+    "valor_da_causa": null,
+    "telefone": "+55 61 98466-6527, +55 61 98466-6526, +55 61 99108-4584"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000385-95.2022.5.13.0031",
+    "estado": "Paraíba",
+    "reclamante": "MONTE CONTA'S ADMINISTRACAO E SERVICOS S/A E OUTROS (4)",
+    "reclamada": "YNARA GOMES ALBUQUERQUE",
+    "valor_da_causa": null,
+    "telefone": "+55 83 99400-4341"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000420-98.2019.5.21.0011",
+    "estado": "Rio Grande do Norte",
+    "reclamante": "UPC PERFURACAO E COMPLETACAO S.A.",
+    "reclamada": "ERONES SALVIANO LOPES",
+    "valor_da_causa": null,
+    "telefone": "+55 84 99851-6305"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000441-46.2023.5.17.0011",
+    "estado": "Espírito Santo",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "DANILLO MAXIMIANO DE OLIVEIRA CORREA",
+    "valor_da_causa": null,
+    "telefone": "+55 27 98896-2273, +55 28 99902-2774"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000457-28.2011.5.01.0023",
+    "estado": "Rio de Janeiro",
+    "reclamante": "CECM. DOS SECURITARIOS, DOS CORRETORES DE SEGUROS E DE CAPITALIZACAO DO RIO DE JANEIRO LTDA.",
+    "reclamada": "ADRIANA ALMEIDA MENENGOY FELLOWS",
+    "valor_da_causa": null,
+    "telefone": "+55 21 97129-0615, +55 21 98565-4341, +55 21 98167-1735, +55 21 99746-3884, +55 21 98385-0594, +55 21 98169-0578"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000524-33.2021.5.05.0022",
+    "estado": "Bahia",
+    "reclamante": "HOSPITAL ESPERANCA SA",
+    "reclamada": "MICHELE DE OLIVEIRA SANTOS TEIXEIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 71 98746-7773"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000533-50.2024.5.13.0027",
+    "estado": "Paraíba",
+    "reclamante": "ATACADAO FREIRE MATERIAL DE CONSTRUCAO LTDA E OUTROS (1)",
+    "reclamada": "CHIARA WEIDJA ALMEIDA CAMPOS",
+    "valor_da_causa": null,
+    "telefone": "+55 83 99412-1587"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000540-89.2023.5.05.0612",
+    "estado": "Bahia",
+    "reclamante": "IFOOD.COM AGENCIA DE RESTAURANTES ONLINE S.A.",
+    "reclamada": "EVANDRO RIBEIRO DOS SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 61 99645-9995"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000586-37.2020.5.17.0002",
+    "estado": "Espírito Santo",
+    "reclamante": "TECHNIP BRASIL - ENGENHARIA, INSTALACOES E APOIO MARITIMO LTDA.",
+    "reclamada": "FABIANO MULINE CORREA",
+    "valor_da_causa": null,
+    "telefone": "+55 22 99763-7258, +55 27 99697-6198, +55 22 99903-5930, +55 27 99831-1160"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000696-05.2024.5.13.0003",
+    "estado": "Paraíba",
+    "reclamante": "UBER DO BRASIL TECNOLOGIA LTDA.",
+    "reclamada": "FABIO CARLOS CARVALHO DE LIMA",
+    "valor_da_causa": null,
+    "telefone": "+55 83 98897-3999, +55 83 98878-3999, +55 83 98135-7398, +55 83 98808-8362, +55 83 99107-0433, +55 83 99115-9204"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000752-14.2023.5.10.0017",
+    "estado": "Distrito Federal",
+    "reclamante": "WINE GARDEN COMERCIO DE BEBIDAS E ORGANIZACAO DE EVENTOS LTDA",
+    "reclamada": "EDIELSON MIRANDA DA SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 61 99404-3353, +55 81 99858-2463, +55 61 99308-5728"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000782-07.2022.5.10.0010",
+    "estado": "Distrito Federal",
+    "reclamante": "SODEXO DO BRASIL COMERCIAL S.A.",
+    "reclamada": "MATEUS ARAUJO DAS NEVES",
+    "valor_da_causa": null,
+    "telefone": "+55 61 99901-8935, +55 61 99990-1893"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0000819-29.2023.5.05.0013",
+    "estado": "Bahia",
+    "reclamante": "UBER DO BRASIL TECNOLOGIA LTDA.",
+    "reclamada": "WALLACE SANTOS NUNES DE JESUS",
+    "valor_da_causa": null,
+    "telefone": "+55 71 99630-6467"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000962-64.2023.5.06.0312",
+    "estado": "Pernambuco",
+    "reclamante": "SOCIEDADE DE EDUCACAO DO VALE DO IPOJUCA S/A",
+    "reclamada": "ANDERSON LAURSEN",
+    "valor_da_causa": null,
+    "telefone": "+55 18 99707-7527, +55 18 99759-2737, +55 18 99771-3551, +55 18 99772-5099, +55 18 99755-8144"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0000969-10.2014.5.02.0045",
+    "estado": "São Paulo",
+    "reclamante": "ZAMP S.A.",
+    "reclamada": "RAFAEL EMIGDIO MIGUEL",
+    "valor_da_causa": null,
+    "telefone": "+55 11 96981-9691"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0001056-47.2024.5.13.0032",
+    "estado": "Paraíba",
+    "reclamante": "UBER DO BRASIL TECNOLOGIA LTDA.",
+    "reclamada": "WILLIAMS OLIVEIRA SOARES",
+    "valor_da_causa": null,
+    "telefone": "+55 83 99919-9070, +55 83 99199-0707, +55 11 99322-5222, +55 11 99516-6515"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0001146-30.2023.5.22.0003",
+    "estado": "Piauí",
+    "reclamante": "ARMAZEM MATEUS S.A.",
+    "reclamada": "FRANCOIS BARBOSA DE SOUSA",
+    "valor_da_causa": null,
+    "telefone": "+55 86 99927-4009"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0001320-82.2024.5.13.0026",
+    "estado": "Paraíba",
+    "reclamante": "99 TECNOLOGIA LTDA",
+    "reclamada": "CARLOS ANTONIO DE OLIVEIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 84 99654-4852"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0001321-16.2023.5.12.0031",
+    "estado": "Santa Catarina",
+    "reclamante": "ROSALANA INDUSTRIA DE MASSAS ALIMENTICIAS LTDA",
+    "reclamada": "WILLIAN LEANDRO",
+    "valor_da_causa": null,
+    "telefone": "+55 47 98402-9372, +55 47 99693-6677"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0010001-31.2022.5.15.0131",
+    "estado": "São Paulo",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "WENDELL VERNACCE GIANETTI DE MATTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 19 99222-6101, +55 19 99774-6936, +55 19 99713-6302"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010003-86.2023.5.03.0167",
+    "estado": "Minas Gerais",
+    "reclamante": "FADEL TRANSPORTES E LOGISTICA LTDA",
+    "reclamada": "RENATO ALVES ROSA",
+    "valor_da_causa": null,
+    "telefone": "+55 34 99968-9018, +55 34 99180-8549, +55 34 99146-4005"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010082-58.2024.5.15.0050",
+    "estado": "São Paulo",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "GABRIEL DE MORAIS TEODORO",
+    "valor_da_causa": null,
+    "telefone": "+55 18 99770-1630"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010736-98.2021.5.18.0007",
+    "estado": "Goiás",
+    "reclamante": "PANIFICADORA ADAO CARRIJO LTDA",
+    "reclamada": "JOAO CARLOS DE SOUZA E OUTROS (3)",
+    "valor_da_causa": null,
+    "telefone": "+55 62 98589-8202, +55 62 99855-8934, +55 18 98167-8386"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0010893-41.2023.5.03.0097",
+    "estado": "Minas Gerais",
+    "reclamante": "USINAS SIDERURGICAS DE MINAS GERAIS S/A. USIMINAS",
+    "reclamada": "ELCIO ALVES SILVA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98630-4524"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011163-70.2024.5.03.0084",
+    "estado": "Minas Gerais",
+    "reclamante": "LONGPING HIGH TECH BIOTECNOLOGIA LTDA.",
+    "reclamada": "ADRIELE MENDES OLIVEIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 38 99944-4782"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011174-49.2019.5.03.0028",
+    "estado": "Minas Gerais",
+    "reclamante": "ELBI ELETRICA INDUSTRIAL LTDA",
+    "reclamada": "CESAR LUIZ HONORATO DE JESUS",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99184-4378, +55 31 99757-6388"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011206-60.2024.5.03.0131",
+    "estado": "Minas Gerais",
+    "reclamante": "CENTRAIS DE ABASTECIMENTO DE MINAS GERAIS S/A - CEASAMINAS",
+    "reclamada": "AUGUSTO CECILIO DOS SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 31 99804-5953"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011366-48.2023.5.03.0187",
+    "estado": "Minas Gerais",
+    "reclamante": "MINERIOS NACIONAL S.A.",
+    "reclamada": "WHANDER LUCIANO MOREIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98421-2183, +55 31 98885-2110"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011417-54.2023.5.15.0016",
+    "estado": "São Paulo",
+    "reclamante": "ADVANCED COMPOSITE - SOLUCOES EM MATERIAIS COMPOSTOS LTDA",
+    "reclamada": "GISELE CRISTIANE GOMES PEREIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 15 99718-6263, +55 15 99742-7206, +55 15 99709-5109"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0025215-03.2022.5.24.0005",
+    "estado": "Mato Grosso do Sul",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "KAMILLA NUNES DE OLIVEIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 67 99198-6359, +55 67 99949-5560"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100397-47.2022.5.01.0421",
+    "estado": "Rio de Janeiro",
+    "reclamante": "DASERRA ENGENHARIA E COMERCIO LTDA",
+    "reclamada": "ROMULO ALBERTO PEREIRA MIRANDA",
+    "valor_da_causa": null,
+    "telefone": "+55 24 99828-0505, +55 24 99848-2886, +55 24 99943-8766, +55 24 99987-1348, +55 24 99827-7289"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100502-09.2023.5.01.0059",
+    "estado": "Rio de Janeiro",
+    "reclamante": "IFOOD.COM AGENCIA DE RESTAURANTES ONLINE S.A.",
+    "reclamada": "ERIBERTO DE OLIVEIRA SANTOS E OUTROS (1)",
+    "valor_da_causa": null,
+    "telefone": "+55 21 96417-5460"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100658-02.2022.5.01.0004",
+    "estado": "Rio de Janeiro",
+    "reclamante": "DE MILLUS S A INDUSTRIA E COMERCIO",
+    "reclamada": "EBERSON VITURINO ALVES DE MEDEIROS",
+    "valor_da_causa": null,
+    "telefone": "+55 21 96975-2299"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100868-29.2018.5.01.0025",
+    "estado": "Rio de Janeiro",
+    "reclamante": "PETROLEO BRASILEIRO S A PETROBRAS",
+    "reclamada": "ROBERTO NAJAR BAZOLLI",
+    "valor_da_causa": null,
+    "telefone": "+55 21 98206-8421, +55 21 99601-7501, +55 21 98871-1012, +55 21 98885-2810, +55 21 98644-1960, +55 22 99985-6912"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100931-31.2023.5.01.0461",
+    "estado": "Rio de Janeiro",
+    "reclamante": "NUCLEBRAS EQUIPAMENTOS PESADOS S/A NUCLEP",
+    "reclamada": "ROBSON DE OLIVEIRA SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 21 98007-6519, +55 21 99742-0571"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0100959-51.2022.5.01.0261",
+    "estado": "Rio de Janeiro",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "ROSANGELA NEVES ANGELINO OLIVEIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 31 98627-0548, +55 31 98784-5226, +55 31 99194-6409"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0101097-86.2022.5.01.0206",
+    "estado": "Rio de Janeiro",
+    "reclamante": "GRUPO CASAS BAHIA S.A.",
+    "reclamada": "RODRIGO LUCAS PEREIRA",
+    "valor_da_causa": null,
+    "telefone": "+55 21 96490-1021"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0101338-59.2019.5.01.0014",
+    "estado": "Rio de Janeiro",
+    "reclamante": "SERTTEL SOLUCOES EM MOBILIDADE E SEGURANCA URBANA LTDA.",
+    "reclamada": "ROBSON GAMA DE MATOS",
+    "valor_da_causa": null,
+    "telefone": "+55 21 98090-3757"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0105700-67.2008.5.02.0433",
+    "estado": "São Paulo",
+    "reclamante": "WK INDUSTRIA E COMERCIO DE FERRAMENTAS E EQUIPAMENTOS INDUSTRIAIS LTDA",
+    "reclamada": "NELSON ALONSO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 99154-5528"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000336-48.2024.5.02.0718",
+    "estado": "São Paulo",
+    "reclamante": "DG VENTURES 1 LTDA",
+    "reclamada": "MARCIA FREITAS AVELINO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 99997-0260, +55 19 99970-2607, +55 11 99970-2607"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000382-84.2024.5.02.0088",
+    "estado": "São Paulo",
+    "reclamante": "HB ASSESSORIA E CONSULTORIA EMPRESARIAL LTDA",
+    "reclamada": "HANNA AMARILIS GONCALVES DOS SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 11 95297-9065"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000565-97.2022.5.02.0323",
+    "estado": "São Paulo",
+    "reclamante": "HEXA CURSOS PRE-VESTIBULARES LTDA",
+    "reclamada": "PEDRO MULLER BEZERRA VASCONCELLOS",
+    "valor_da_causa": null,
+    "telefone": "+55 11 96371-4909"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000797-76.2022.5.02.0431",
+    "estado": "São Paulo",
+    "reclamante": "RELIGARE CENTRO DE REABILITACAO LTDA",
+    "reclamada": "GISELE ZACHARIAS MIOLARO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 99206-3505"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1000969-20.2023.5.02.0322",
+    "estado": "São Paulo",
+    "reclamante": "B.L. SERVICE ADMINISTRADORA DE SERVICOS LTDA",
+    "reclamada": "JOSELMA SABINO DOS SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 11 97238-9582, +55 11 96406-8127"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001391-53.2022.5.02.0023",
+    "estado": "São Paulo",
+    "reclamante": "GP - GUARDA PATRIMONIAL DE SAO PAULO LTDA.",
+    "reclamada": "ALEX SANDRO ROGER SILVA DO ROSARIO",
+    "valor_da_causa": null,
+    "telefone": "+55 11 99161-1221"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001541-73.2023.5.02.0322",
+    "estado": "São Paulo",
+    "reclamante": "LINKTEL TELECOMUNICACOES DO BRASIL LTDA",
+    "reclamada": "GABRIEL LIMONE NUNES",
+    "valor_da_causa": null,
+    "telefone": "+55 11 97655-6258"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "1001786-46.2022.5.02.0055",
+    "estado": "São Paulo",
+    "reclamante": "NEOBPO SERVICOS DE PROCESSOS DE NEGOCIOS E TECNOLOGIA S.A.",
+    "reclamada": "ELAINE AFOLABI SILVA COSTA",
+    "valor_da_causa": null,
+    "telefone": "+55 11 98496-5502"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0000930-88.2024.5.13.0034",
+    "estado": "Paraíba",
+    "reclamante": "99 TECNOLOGIA LTDA",
+    "reclamada": "CARLOS ALBERTO FERNANDES GOMES",
+    "valor_da_causa": null,
+    "telefone": "+55 83 99986-5359"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0001032-07.2022.5.10.0021",
+    "estado": "Distrito Federal",
+    "reclamante": "ADOBE ASSESSORIA DE SERVICOS CADASTRAIS S.A. E OUTROS (1)",
+    "reclamada": "ALINE MARQUES SALES",
+    "valor_da_causa": null,
+    "telefone": "+55 61 99857-3682"
+  },
+  {
+    "classeProcesso": "RRAg",
+    "numero_processo": "0001150-13.2023.5.13.0005",
+    "estado": "Paraíba",
+    "reclamante": "UBER DO BRASIL TECNOLOGIA LTDA.",
+    "reclamada": "ELMO PETRUCIO MENDES PIRES FILHO",
+    "valor_da_causa": null,
+    "telefone": "+55 83 98126-3165"
+  },
+  {
+    "classeProcesso": "AIRR",
+    "numero_processo": "0011506-89.2023.5.18.0082",
+    "estado": "Goiás",
+    "reclamante": "BRAVO SERVICOS LOGISTICOS LTDA",
+    "reclamada": "FRANCISCO ASSIS DOS SANTOS",
+    "valor_da_causa": null,
+    "telefone": "+55 64 99254-2810"
   }
 ]
